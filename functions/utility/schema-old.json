@@ -1,0 +1,479 @@
+{
+    "_id": "5c58e7acc8c1aa0ba1fbe73d",
+    "lastUpdated": "2019-02-05T01:32:30.125Z",
+    "createdOn": "2018-06-22T04:23:37.210Z",
+    "name": "Products",
+    "slug": "products",
+    "singularName": "Product",
+    "fields": [
+        {
+            "name": "Category",
+            "slug": "category2",
+            "type": "Option",
+            "required": true,
+            "editable": true,
+            "helpText": "",
+            "id": "286578767c56c7dd569618c01bb7e636",
+            "validations": {
+                "options": [
+                    {
+                        "id": "8394016d6ceeaa8e458694b585d62bc3",
+                        "name": "Seating"
+                    },
+                    {
+                        "id": "01f0b99570e4d8beda8cd29ae0a76053",
+                        "name": "Tables"
+                    },
+                    {
+                        "id": "70ece40f000e38f5694cddf72e0b206a",
+                        "name": "Casegoods"
+                    },
+                    {
+                        "name": "Accessories",
+                        "id": "0d22a02716c810b85fd48d7da466098d"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Subcategory",
+            "slug": "subcategory",
+            "type": "Option",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "3327da3761121bc9a0098ce466f1688e",
+            "validations": {
+                "options": [
+                    {
+                        "id": "7cfa7fd5e631e82d08a6de0468da5c35",
+                        "name": "Sofas"
+                    },
+                    {
+                        "id": "78526b2b964141d21b3f663413685208",
+                        "name": "Chairs"
+                    },
+                    {
+                        "id": "b805ccb024626778668fefbdcf999c86",
+                        "name": "Chaises"
+                    },
+                    {
+                        "id": "fa626f131d5a9b728fa87a742e202ab9",
+                        "name": "Benches"
+                    },
+                    {
+                        "id": "9663cdd0e9f60a83df71823fa77aff4d",
+                        "name": "Side Tables"
+                    },
+                    {
+                        "id": "3ce247a7c681c1a5b6aee4e91539bc8a",
+                        "name": "Coffee/Cocktail Tables"
+                    },
+                    {
+                        "id": "e423791764dba10c57fa3ef720f48214",
+                        "name": "Cabinets"
+                    },
+                    {
+                        "id": "ed9e56fa4497e1ffdf49067558eb7aec",
+                        "name": "Mirrors"
+                    },
+                    {
+                        "id": "bb2b7fb6e109336c2d953c4eee568cfb",
+                        "name": "Screens"
+                    },
+                    {
+                        "id": "c54273e4cac09a7edfcc93f83d3a5d49",
+                        "name": "Decorative Accessories"
+                    },
+                    {
+                        "name": "Shelving",
+                        "id": "cde8bc5ef2b19e7ebe460cf30185941f"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Description",
+            "slug": "description",
+            "type": "RichText",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "b0323b1760f0869f3a433187a1a0b26a"
+        },
+        {
+            "name": "Is this a new product?",
+            "slug": "is-this-a-new-product",
+            "type": "Bool",
+            "required": false,
+            "editable": true,
+            "id": "1be89320607824b46f4fc7900e2a73f2"
+        },
+        {
+            "name": "Dimensions",
+            "slug": "dimensions-2",
+            "type": "RichText",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "7b9f6f78f1da5b010e2d5af6af1b0125"
+        },
+        {
+            "name": "Tearsheet",
+            "slug": "test",
+            "type": "FileRef",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "4b5bd033c111a047ffc57dd48d8f7d7f"
+        },
+        {
+            "name": "SKU",
+            "slug": "sku",
+            "type": "PlainText",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "e41cdeb6812a857a886ce15515a4a6a3",
+            "validations": {
+                "singleLine": true
+            }
+        },
+        {
+            "name": "Price",
+            "slug": "price-2",
+            "type": "RichText",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "b11d3727b14c2ef98211b77bd5f4f25b"
+        },
+        {
+            "name": "Image 1",
+            "slug": "primary-image",
+            "type": "ImageRef",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "be71479f8ba586b267b22801ed83c231"
+        },
+        {
+            "name": "Caption 1",
+            "slug": "caption-1",
+            "type": "PlainText",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "6e6fd87e2ca6772f856cb1fc71b0833a",
+            "validations": {
+                "singleLine": true
+            }
+        },
+        {
+            "name": "Is Image 1 in portrait mode?",
+            "slug": "is-image-1-in-portrait-mode",
+            "type": "Bool",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "8cc7fe87b7ac0337c0a75d8b262f4b6f"
+        },
+        {
+            "name": "Image 2",
+            "slug": "image-2-2",
+            "type": "ImageRef",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "0e6911fda715b5532cbb04828770ba18"
+        },
+        {
+            "name": "Caption 2",
+            "slug": "caption-2",
+            "type": "PlainText",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "a4b8a08b221c9534d30395bdbf89189e",
+            "validations": {
+                "singleLine": true
+            }
+        },
+        {
+            "name": "Image 3",
+            "slug": "image-3-2",
+            "type": "ImageRef",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "554ab458b2c74dba1a8d63c63055d2ca"
+        },
+        {
+            "name": "Caption 3",
+            "slug": "caption-3",
+            "type": "PlainText",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "e6d16acecdbb2c9658f74b25afe422e8",
+            "validations": {
+                "singleLine": true
+            }
+        },
+        {
+            "name": "Image 4",
+            "slug": "image-4-2",
+            "type": "ImageRef",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "1e7105569fb221a9512908c4b92c14cf"
+        },
+        {
+            "name": "Caption 4",
+            "slug": "caption-4",
+            "type": "PlainText",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "2737e78bb78e48a20a40d2270f86e0d4",
+            "validations": {
+                "singleLine": true
+            }
+        },
+        {
+            "name": "Image 5",
+            "slug": "image-5-2",
+            "type": "ImageRef",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "9e167168bb64e7a4843ce8798cbcc56d"
+        },
+        {
+            "name": "Caption 5",
+            "slug": "caption-5",
+            "type": "PlainText",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "3889a981e315833052b8fbc026969944",
+            "validations": {
+                "singleLine": true
+            }
+        },
+        {
+            "name": "Image 6",
+            "slug": "image-6-2",
+            "type": "ImageRef",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "6fae3d9ac5957fa017f4d9f04bc927f1"
+        },
+        {
+            "name": "Caption 6",
+            "slug": "caption-6",
+            "type": "PlainText",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "1f14184c1cf9285bab21cdf4a232e89f",
+            "validations": {
+                "singleLine": true
+            }
+        },
+        {
+            "name": "Image 7",
+            "slug": "image-7-3",
+            "type": "ImageRef",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "31bcb61570437d7158e460fbdbe0159a"
+        },
+        {
+            "name": "Image 8",
+            "slug": "image-8-2",
+            "type": "ImageRef",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "35ecd02c91e4f0f7c093d2ab78ff2583"
+        },
+        {
+            "name": "Image 9",
+            "slug": "image-9-2",
+            "type": "ImageRef",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "8b837af39813272cfd3454da33faeb5d"
+        },
+        {
+            "name": "Image 10",
+            "slug": "image-10-2",
+            "type": "ImageRef",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "9bda9e153fc3d468b6c2fee44ce72c86"
+        },
+        {
+            "name": "Custom options",
+            "slug": "custom-options-2",
+            "type": "RichText",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "30934b5cf99982127d017e7e36bd11e2"
+        },
+        {
+            "name": "Metal Finishes",
+            "slug": "metal-finishes",
+            "type": "ItemRefSet",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "6bdb33d02907519f985ce7054f1c7314",
+            "validations": {
+                "collectionId": "5c58e7acc8c1aabfe5fbe73e"
+            }
+        },
+        {
+            "name": "Stone FInishes",
+            "slug": "stone-finishes",
+            "type": "ItemRefSet",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "7c438ae742a4007491780a8b13a85bfc",
+            "validations": {
+                "collectionId": "5c58e7acc8c1aa1e8cfbe73f"
+            }
+        },
+        {
+            "name": "Veneer Finishes",
+            "slug": "veneer-finishes",
+            "type": "ItemRefSet",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "a1e9059df1bb117a9de26036ca2eebde",
+            "validations": {
+                "collectionId": "5c58e7acc8c1aabfcafbe740"
+            }
+        },
+        {
+            "name": "Specialty Finishes",
+            "slug": "specialty-finishes",
+            "type": "ItemRefSet",
+            "required": false,
+            "editable": true,
+            "helpText": "",
+            "id": "54b842f2fc8c5cf0cdf7a14dc53b4df9",
+            "validations": {
+                "collectionId": "5c58e7acc8c1aabb1afbe741"
+            }
+        },
+        {
+            "name": "Name",
+            "slug": "name",
+            "type": "PlainText",
+            "required": true,
+            "editable": true,
+            "id": "a7c2be17d9ba450a187c78c4c7e3fc9d",
+            "validations": {
+                "maxLength": 256
+            }
+        },
+        {
+            "name": "Slug",
+            "slug": "slug",
+            "type": "PlainText",
+            "required": true,
+            "editable": true,
+            "unique": true,
+            "id": "b88058b0c6f15e3b83564c68d474b0f4",
+            "validations": {
+                "maxLength": 256,
+                "messages": {
+                    "pattern": "Must be alphanumerical and not contain any spaces or special characters",
+                    "maxLength": "Must be less than 256 characters"
+                }
+            }
+        },
+        {
+            "name": "Archived",
+            "slug": "_archived",
+            "type": "Bool",
+            "required": true,
+            "editable": true,
+            "id": "5dc4e96f41dad6ef2f21b80258994020",
+            "default": false
+        },
+        {
+            "name": "Draft",
+            "slug": "_draft",
+            "type": "Bool",
+            "required": true,
+            "editable": true,
+            "id": "30b2b059e1517b1d52822ed332b48095",
+            "default": false
+        },
+        {
+            "name": "Created On",
+            "slug": "created-on",
+            "type": "Date",
+            "required": false,
+            "editable": false,
+            "id": "d084ca2f24d1794f5f8a08fd7d411400"
+        },
+        {
+            "name": "Updated On",
+            "slug": "updated-on",
+            "type": "Date",
+            "required": false,
+            "editable": false,
+            "id": "57c97057ad874d6bf9cbbc00ddc8d21a"
+        },
+        {
+            "name": "Published On",
+            "slug": "published-on",
+            "type": "Date",
+            "required": false,
+            "editable": false,
+            "id": "0212246ef0707090ce101da78defbd11"
+        },
+        {
+            "name": "Created By",
+            "slug": "created-by",
+            "type": "User",
+            "required": false,
+            "editable": false,
+            "id": "bc877333bfe86742d1acf175f2c15775"
+        },
+        {
+            "name": "Updated By",
+            "slug": "updated-by",
+            "type": "User",
+            "required": false,
+            "editable": false,
+            "id": "53cd3405f0fc411095dc41a46577b779"
+        },
+        {
+            "name": "Published By",
+            "slug": "published-by",
+            "type": "User",
+            "required": false,
+            "editable": false,
+            "id": "b07aad8f0516bc526e37881ad6b6c668"
+        }
+    ],
+    "_meta": {
+        "rateLimit": {
+            "limit": 60,
+            "remaining": 48
+        }
+    }
+}

@@ -1,0 +1,47 @@
+.pig-figure::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(to bottom, transparent, black);
+    z-index: 2;
+    transition: all 0.4s;
+    pointer-events: unset;
+    opacity: 0;
+}
+.pig-figure::after {
+    position: absolute;
+    content: attr(data-product);
+    left: 1em;
+    bottom: 1em;
+    color: white;
+    z-index: 3;
+    transition: all 0.4s;
+    opacity: 0;
+}
+.pig-figure:hover::before, .pig-figure:hover::after {
+    opacity: 1;
+    pointer-events: none;
+}
+@media (max-width: 900px) {
+    #pig .pig-figure {
+        pointer-events: none;
+        margin-bottom: 4em;
+        overflow: visible;
+    }
+    #pig .pig-figure img.pig-thumbnail {
+        filter: none;
+    }
+    .pig-figure::after {
+        opacity: 1;
+        left: 0;
+        bottom: 0;
+        color: black;
+        /* font-size: ; */
+        line-height: 100%;
+        transform: translateY(calc(100% + 0.4em));
+    }
+
+}
