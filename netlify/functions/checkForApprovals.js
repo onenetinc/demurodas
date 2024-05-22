@@ -1,7 +1,7 @@
 const admin = require('firebase-admin');
-const getEnabledUsers = require('../helpers/getEnabledUsers');
-const getWelcomeNotSent = require('../helpers/getWelcomeNotSent');
-const welcomeUser = require('../helpers/welcomeUser');
+const getEnabledUsers = require('./helpers/getEnabledUsers');
+const getWelcomeNotSent = require('./helpers/getWelcomeNotSent');
+const welcomeUser = require('./helpers/welcomeUser');
 
 // Initialize Firebase Admin if not already initialized
 if (!admin.apps.length) {

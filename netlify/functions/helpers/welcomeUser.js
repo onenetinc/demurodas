@@ -1,4 +1,4 @@
-const getAppSettings = require('../helpers/getAppSettings');
+const getAppSettings = require('./getAppSettings');
 // const getPasswordResetLink = require('./getPasswordResetLink');
 const sendEmail = require('./sendEmail');
 const userWelcomeEmailBody = require('../emailBodies/userWelcomeEmailBody');
