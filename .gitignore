@@ -12,4 +12,4 @@ firebase-debug.log
 
 .runtimeconfig.json
 
-functions/service-account.json
+netlify/functions/service-account.json
