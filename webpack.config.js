@@ -28,8 +28,8 @@ module.exports = {
     },
     target: 'node',  // Target node environment for Netlify functions
     externals: {
-        'firebase-admin': 'commonjs firebase-admin',
-        'firebase-functions': 'commonjs firebase-functions',
+        // 'firebase-admin': 'commonjs firebase-admin',
+        // 'firebase-functions': 'commonjs firebase-functions',
         'webflow-api': 'commonjs webflow-api',
         'bufferutil': 'commonjs bufferutil',
         'utf-8-validate': 'commonjs utf-8-validate',
