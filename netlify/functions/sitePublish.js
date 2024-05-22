@@ -7,7 +7,8 @@ const checkforNewItems = require('./helpers/checkforNewItems');
 const checkForUpdatedItems = require('./helpers/checkForUpdatedItems');
 const publishMessage = require('./helpers/publishMessage');
 
-const serviceAccount = require('./service-account.json');
+const serviceAccountBuffer = Buffer.from(process.env.SERVICE_ACCOUNT, 'base64');
+const serviceAccount = JSON.parse(serviceAccountBuffer.toString('utf8'));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

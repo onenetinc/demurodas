@@ -5,7 +5,8 @@ const sendEmail = require('./helpers/sendEmail');
 const userSignUpEmailBody = require('./emailBodies/userSignUpEmailBody');
 const adminUserSignUpEmailBody = require('./emailBodies/adminUserSignUpEmailBody');
 
-const serviceAccount = require('./service-account.json');
+const serviceAccountBuffer = Buffer.from(process.env.SERVICE_ACCOUNT, 'base64');
+const serviceAccount = JSON.parse(serviceAccountBuffer.toString('utf8'));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

@@ -10,7 +10,8 @@ const updateCmsMapping = require('./helpers/updateCmsMapping');
 const getAspectRatio = require('./helpers/getAspectRatio');
 const removeTempCmsImages = require('./helpers/removeTempCmsImages');
 
-const serviceAccount = require('./service-account.json');
+const serviceAccountBuffer = Buffer.from(process.env.SERVICE_ACCOUNT, 'base64');
+const serviceAccount = JSON.parse(serviceAccountBuffer.toString('utf8'));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
