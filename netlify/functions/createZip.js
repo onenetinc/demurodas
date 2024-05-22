@@ -1,4 +1,4 @@
-const admin = require('firebase-admin');
+const { admin } = require('./helpers/firebase');
 const jszip = require('jszip');
 const path = require('path');
 const os = require('os');
@@ -7,10 +7,6 @@ const verifyToken = require('./helpers/verifyToken');
 const getBase64Buffer = require('./helpers/getBase64Buffer');
 const getUrls = require('./helpers/getUrls');
 
-// Initialize Firebase Admin if not already initialized
-if (!admin.apps.length) {
-  admin.initializeApp();
-}
 
 const createZip = async (req, res) => {
   try {

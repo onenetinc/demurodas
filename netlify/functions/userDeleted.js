@@ -1,17 +1,8 @@
-const admin = require('firebase-admin');
+const { db } = require('../helpers/firebase');
 const sendEmail = require('./helpers/sendEmail');
 const deleteUserDoc = require('./helpers/deleteUserDoc');
 const userSignUpDisapprovedEmailBody = require('./emailBodies/userSignUpDisapprovedEmailBody');
 
-const serviceAccountBuffer = Buffer.from(process.env.SERVICE_ACCOUNT, 'base64');
-const serviceAccount = JSON.parse(serviceAccountBuffer.toString('utf8'));
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'demurodas.appspot.com'
-});
-
-const db = admin.firestore();
 
 const userDeleted = async (user) => {
   return new Promise(async (resolve, reject) => {

@@ -5,17 +5,8 @@ const puppeteer = require('puppeteer');
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-const admin = require('firebase-admin');
+const { bucket } = require('../helpers/firebase');
 
-const serviceAccountBuffer = Buffer.from(process.env.SERVICE_ACCOUNT, 'base64');
-const serviceAccount = JSON.parse(serviceAccountBuffer.toString('utf8'));
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'demurodas.appspot.com'
-});
-
-const bucket = admin.storage().bucket();
 
 const generatePdfForProduct = async (slug) => {
   try {

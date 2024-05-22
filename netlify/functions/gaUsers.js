@@ -1,17 +1,8 @@
-const admin = require('firebase-admin');
+const { admin, db } = require('../helpers/firebase');
 const getAppSettings = require('./helpers/getAppSettings');
 const getEnabledUsers = require('./helpers/getEnabledUsers');
 const getUserDoc = require('./helpers/getUserDoc');
 
-const serviceAccountBuffer = Buffer.from(process.env.SERVICE_ACCOUNT, 'base64');
-const serviceAccount = JSON.parse(serviceAccountBuffer.toString('utf8'));
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'demurodas.appspot.com'
-});
-
-const db = admin.firestore();
 
 const getUsers = async (req, res) => {
   try {

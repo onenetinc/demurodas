@@ -1,4 +1,4 @@
-const admin = require('firebase-admin');
+const { db, bucket } = require('../helpers/firebase');
 const getAppSettings = require('./helpers/getAppSettings');
 const getRandomId = require('./helpers/getRandomId');
 const getProductPricing = require('./helpers/getProductPricing');
@@ -8,16 +8,6 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 
-const serviceAccountBuffer = Buffer.from(process.env.SERVICE_ACCOUNT, 'base64');
-const serviceAccount = JSON.parse(serviceAccountBuffer.toString('utf8'));
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'demurodas.appspot.com'
-});
-
-const db = admin.firestore();
-const bucket = admin.storage().bucket();
 
 const generateProductPdfs = async (message) => {
   return new Promise(async (resolve, reject) => {

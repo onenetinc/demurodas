@@ -1,4 +1,4 @@
-const admin = require('firebase-admin');
+const { db } = require('../helpers/firebase');
 const getWfItems = require('./helpers/getWfItems');
 const getMapping = require('./helpers/getMapping');
 const createNewMapping = require('./helpers/createNewMapping');
@@ -6,16 +6,6 @@ const checkForDeletions = require('./helpers/checkForDeletions');
 const checkforNewItems = require('./helpers/checkforNewItems');
 const checkForUpdatedItems = require('./helpers/checkForUpdatedItems');
 const publishMessage = require('./helpers/publishMessage');
-
-const serviceAccountBuffer = Buffer.from(process.env.SERVICE_ACCOUNT, 'base64');
-const serviceAccount = JSON.parse(serviceAccountBuffer.toString('utf8'));
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'demurodas.appspot.com'
-});
-
-const db = admin.firestore();
 
 const sitePublish = async (req, res) => {
   try {

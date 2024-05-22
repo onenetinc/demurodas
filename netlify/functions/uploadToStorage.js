@@ -1,4 +1,4 @@
-const admin = require('firebase-admin');
+const { db, bucket } = require('../helpers/firebase');
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
@@ -9,17 +9,6 @@ const uploadCmsImages = require('./helpers/uploadCmsImages');
 const updateCmsMapping = require('./helpers/updateCmsMapping');
 const getAspectRatio = require('./helpers/getAspectRatio');
 const removeTempCmsImages = require('./helpers/removeTempCmsImages');
-
-const serviceAccountBuffer = Buffer.from(process.env.SERVICE_ACCOUNT, 'base64');
-const serviceAccount = JSON.parse(serviceAccountBuffer.toString('utf8'));
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'demurodas.appspot.com'
-});
-
-const db = admin.firestore();
-const bucket = admin.storage().bucket();
 
 const uploadToStorage = async (message) => {
   console.log("TESSST");

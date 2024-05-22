@@ -1,14 +1,7 @@
-const admin = require('firebase-admin');
+const { admin, db } = require('./helpers/firebase');
 const getEnabledUsers = require('./helpers/getEnabledUsers');
 const getWelcomeNotSent = require('./helpers/getWelcomeNotSent');
 const welcomeUser = require('./helpers/welcomeUser');
-
-// Initialize Firebase Admin if not already initialized
-if (!admin.apps.length) {
-  admin.initializeApp();
-}
-
-const db = admin.firestore();
 
 const checkForApprovals = async (req, res) => {
   try {

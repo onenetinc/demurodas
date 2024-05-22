@@ -1,16 +1,6 @@
-const admin = require('firebase-admin');
+const { admin } = require('../helpers/firebase');
 const verifyToken = require('./helpers/verifyToken');
 const getProductPricing = require('./helpers/getProductPricing');
-
-const serviceAccountBuffer = Buffer.from(process.env.SERVICE_ACCOUNT, 'base64');
-const serviceAccount = JSON.parse(serviceAccountBuffer.toString('utf8'));
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'demurodas.appspot.com'
-});
-
-const db = admin.firestore();
 
 const getPrivateWfData = async (req, res) => {
   try {
