@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-const { bucket } = require('../helpers/firebase');
+const { bucket } = require('./helpers/firebase');
 
 
 const generatePdfForProduct = async (slug) => {

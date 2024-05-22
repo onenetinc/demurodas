@@ -1,4 +1,4 @@
-const { admin, db } = require('../helpers/firebase');
+const { admin, db } = require('./helpers/firebase');
 const getAppSettings = require('./helpers/getAppSettings');
 const getPasswordResetLink = require('./helpers/getPasswordResetLink');
 const userPasswordResetEmailBody = require('./emailBodies/userPasswordResetEmailBody');

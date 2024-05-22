@@ -1,4 +1,4 @@
-const { db } = require('../helpers/firebase');
+const { db } = require('./helpers/firebase');
 const getAppSettings = require('./helpers/getAppSettings');
 const getUserDoc = require('./helpers/getUserDoc');
 const sendEmail = require('./helpers/sendEmail');

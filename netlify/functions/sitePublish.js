@@ -1,4 +1,4 @@
-const { db } = require('../helpers/firebase');
+const { db } = require('./helpers/firebase');
 const getWfItems = require('./helpers/getWfItems');
 const getMapping = require('./helpers/getMapping');
 const createNewMapping = require('./helpers/createNewMapping');

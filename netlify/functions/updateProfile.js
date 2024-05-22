@@ -1,4 +1,4 @@
-const { admin, db } = require('../helpers/firebase');
+const { admin, db } = require('./helpers/firebase');
 const verifyToken = require('./helpers/verifyToken');
 const updateUserProfile = require('./helpers/updateUserProfile');
 const updateUserDoc = require('./helpers/updateUserDoc');

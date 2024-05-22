@@ -1,4 +1,4 @@
-const { admin } = require('../helpers/firebase');
+const { admin } = require('./helpers/firebase');
 const verifyToken = require('./helpers/verifyToken');
 const getProductPricing = require('./helpers/getProductPricing');
 

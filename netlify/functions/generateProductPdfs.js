@@ -1,4 +1,4 @@
-const { db, bucket } = require('../helpers/firebase');
+const { db, bucket } = require('./helpers/firebase');
 const getAppSettings = require('./helpers/getAppSettings');
 const getRandomId = require('./helpers/getRandomId');
 const getProductPricing = require('./helpers/getProductPricing');

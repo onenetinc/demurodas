@@ -1,4 +1,4 @@
-const { db, bucket } = require('../helpers/firebase');
+const { db, bucket } = require('./helpers/firebase');
 const path = require('path');
 const os = require('os');
 const fs = require('fs');

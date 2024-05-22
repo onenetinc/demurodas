@@ -1,4 +1,4 @@
-const { db } = require('../helpers/firebase');
+const { db } = require('./helpers/firebase');
 const sendEmail = require('./helpers/sendEmail');
 const deleteUserDoc = require('./helpers/deleteUserDoc');
 const userSignUpDisapprovedEmailBody = require('./emailBodies/userSignUpDisapprovedEmailBody');
