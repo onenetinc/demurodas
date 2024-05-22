@@ -20,6 +20,7 @@ module.exports = {
         uploadToStorage: './netlify/functions/uploadToStorage.js',
         userCreated: './netlify/functions/userCreated.js',
         userDeleted: './netlify/functions/userDeleted.js',
+        hello: './netlify/functions/hello.js',
     },
     output: {
         path: path.resolve(__dirname, 'netlify/functions/bundled'),
