@@ -48,20 +48,28 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
         }
       }),
       send: (message) => ({
         statusCode: code,
         body: message,
         headers: {
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
         }
       })
     })
   };
 
-  await signUp(req, res);
+  if (event.httpMethod === 'OPTIONS') {
+    return res.status(200).send('OK');
+  }
+
+  return await signUp(req, res);
 };
 
 
