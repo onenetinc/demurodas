@@ -31,6 +31,20 @@ const getPrivateWfData = async (req, res) => {
 };
 
 exports.handler = async (event, context) => {
+
+  // 1. Handle OPTIONS preflight
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS'
+      },
+      body: 'OK'
+    };
+  }
+
   const req = {
     query: event.queryStringParameters,
     method: event.httpMethod,
@@ -39,6 +53,7 @@ exports.handler = async (event, context) => {
     path: event.path
   };
 
+  // 2. Add CORS headers to your normal responses
   const res = {
     status: (code) => ({
       json: (data) => ({
@@ -46,18 +61,51 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET,POST,OPTIONS'
         }
       }),
       send: (message) => ({
         statusCode: code,
         body: message,
         headers: {
-          'Access-Control-Allow-Origin': '*'
-        }
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET,POST,OPTIONS'
+        },
       })
+
     })
   };
+
+  // const req = {
+  //   query: event.queryStringParameters,
+  //   method: event.httpMethod,
+  //   headers: event.headers,
+  //   body: event.body,
+  //   path: event.path
+  // };
+
+  // const res = {
+  //   status: (code) => ({
+  //     json: (data) => ({
+  //       statusCode: code,
+  //       body: JSON.stringify(data),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Access-Control-Allow-Origin': '*'
+  //       }
+  //     }),
+  //     send: (message) => ({
+  //       statusCode: code,
+  //       body: message,
+  //       headers: {
+  //         'Access-Control-Allow-Origin': '*'
+  //       }
+  //     })
+  //   })
+  // };
 
   await getPrivateWfData(req, res);
 };
