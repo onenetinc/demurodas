@@ -1,8 +1,8 @@
 // const Webflow = require('webflow-api');
 const { WebflowClient } = require('webflow-api');
 // import Webflow from 'webflow-api';
-// const webflow = new WebflowClient({ accessToken: 'acfa51cf1555df256a0006988aa891ad0ff797c091bd08505fcf03d53db44c08' });
-const webflow = new WebflowClient({accessToken: 'bba5439f0f7463ca6c37c7f30d1d302cda2f7a5ee29731fb39e701fef0bc3cdc'});
+// const webflow = new WebflowClient({ accessToken: 'acfa51cf1555df256a0006988aa891ad0ff797c091bd08505fcf03d53db44c08' }); // old token and sdk syntax
+const webflow = new WebflowClient({accessToken: process.env.WEBFLOW_TOKEN});
 const collectionId = '624b54916b21e6aa15e8fe92';
 
 const getWfItems = () => {
