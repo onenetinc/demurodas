@@ -5,8 +5,10 @@ const getProductPricing = require('./helpers/getProductPricing');
 const getPrivateWfData = async (req, res) => {
   try {
     const sku = req.query.sku;
+    // const sku = 'Arche Bench 1 01-05-001-ACBZ'; //for testing
     const token = req.query.token;
     const isAuthed = await verifyToken(admin, token);
+    // const isAuthed = true; // for testing
 
     if (!sku) {
       console.log(`No item sku was provided - terminating with a 400`);
@@ -107,7 +109,14 @@ exports.handler = async (event, context) => {
   //   })
   // };
 
-  await getPrivateWfData(req, res);
+
+  // console.log("serviceAccount:", process.env.SERVICE_ACCOUNT);
+  // return {
+  //   statusCode: 200,
+  //   body: 'OK'
+  // }
+
+  return await getPrivateWfData(req, res);
 };
 
 

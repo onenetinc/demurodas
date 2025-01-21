@@ -18,12 +18,12 @@ const getProductPricing = (query) => {
             for (i = 0; i < allItems.length; i++) {
                 const item = allItems[i];
     
-                if (item[itemKey] === itemValue) {
+                if (item.fieldData[itemKey] === itemValue) {
         
-                    if (item.hasOwnProperty('price-2') && item['price-2'] !== null) {
+                    if (item.fieldData.hasOwnProperty('price-2') && item.fieldData['price-2'] !== null) {
                         
                         console.log(`Found a CMS item for "${itemValue}" and got pricing`);
-                        result = item['price-2'].trim();
+                        result = item.fieldData['price-2'].trim();
                         break;
     
                     }

@@ -14,3 +14,5 @@ firebase-debug.log
 
 netlify/functions/service-account.json
 netlify/functions/service-account.json.base64
+# Local Netlify folder
+.netlify
