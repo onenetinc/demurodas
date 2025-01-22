@@ -566,6 +566,8 @@
 
 /*! firebase-admin v11.11.1 */
 
+/*! https://mths.be/punycode v1.4.1 by @mathias */
+
 /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
 
 /*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */

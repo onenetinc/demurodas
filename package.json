@@ -11,6 +11,7 @@
     "run-dev": "minify ../pretty -d ../public/scripts && firebase serve",
     "deploy-all": "minify ../pretty -d ../public/scripts --no-comments --removeConsole && firebase deploy",
     "minify": "minify ../pretty -d ../public/scripts --no-comments --removeConsole",
+    "build-functions": "webpack --config webpack.config.js",
     "deploy-hosting": "minify ../pretty -d ../public/scripts --no-comments --removeConsole && firebase deploy --only hosting",
     "deploy-functions": "firebase deploy --only functions"
   },
