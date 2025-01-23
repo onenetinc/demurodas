@@ -65,6 +65,7 @@ exports.handler = async (event, context) => {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET,POST,OPTIONS'
         }
       }),
       send: (message) => ({
@@ -73,12 +74,13 @@ exports.handler = async (event, context) => {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET,POST,OPTIONS'
         }
       })
     })
   };
 
-  await getProfile(req, res);
+  return await getProfile(req, res);
 };
 
 
