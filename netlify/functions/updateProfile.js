@@ -56,7 +56,7 @@ exports.handler = async (event, context) => {
     })
   };
 
-  await updateProfile(req, res);
+  return await updateProfile(req, res);
 };
 
 
