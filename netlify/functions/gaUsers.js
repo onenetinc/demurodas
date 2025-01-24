@@ -72,7 +72,7 @@ exports.handler = async (event, context) => {
     })
   };
 
-  await getUsers(req, res);
+  return await getUsers(req, res);
 };
 
 

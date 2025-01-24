@@ -1,9 +1,8 @@
 // const Webflow = require('webflow-api');
 const { WebflowClient } = require('webflow-api');
-// import Webflow from 'webflow-api';
 // const webflow = new WebflowClient({ accessToken: 'acfa51cf1555df256a0006988aa891ad0ff797c091bd08505fcf03d53db44c08' }); // old token and sdk syntax
 const webflow = new WebflowClient({accessToken: process.env.WEBFLOW_TOKEN});
-const collectionId = '624b54916b21e6aa15e8fe92';
+const collectionId = process.env.WEBFLOW_PRODUCTS_ID;
 
 const getWfItems = () => {
 

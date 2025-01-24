@@ -1,7 +1,5 @@
 const fs = require('fs');
 
-const Webflow = require('webflow-api');
-
 const getWfItems = require('../helpers/getWfItems');
 
 getWfItems().then((items) => {

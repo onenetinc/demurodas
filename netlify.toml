@@ -4,3 +4,12 @@
 
 [[plugins]]
   package = "@netlify/plugin-functions-install-core"
+
+[[plugins]]
+  package = "@netlify/plugin-scheduled-functions"
+
+[functions.checkForApprovals]
+  schedule = "@daily"
+
+[functions.generateProductPdfs]
+  schedule = "*/20 * * * *" # Runs every 20 minutes

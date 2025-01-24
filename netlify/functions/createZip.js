@@ -139,7 +139,7 @@ exports.handler = async (event, context) => {
     }
   };
 
-  await createZip(req, res);
+  return await createZip(req, res);
 };
 
 

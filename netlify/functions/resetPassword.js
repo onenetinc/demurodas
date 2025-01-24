@@ -68,7 +68,7 @@ exports.handler = async (event, context) => {
     })
   };
 
-  await resetPassword(req, res);
+  return await resetPassword(req, res);
 };
 
 

@@ -116,7 +116,7 @@ exports.handler = async (event, context) => {
     })
   };
 
-  await sitePublish(req, res);
+  return await sitePublish(req, res);
 };
 
 
