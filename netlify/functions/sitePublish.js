@@ -43,6 +43,10 @@ const sitePublish = async (req, res) => {
 
     if (updatedCmsItems !== null) {
       updatedCmsItems.forEach(id => {
+        if (!updatedMapping[id].slug) {
+          console.error(`Skipping item with ID ${id} due to missing slug`);
+          return;
+        }
         savedMapping[id] = updatedMapping[id];
         toProcess.push(publishMessage('processCmsItem', { id: id, imgUrl: updatedMapping[id].imgUrl }));
         toProcess.push(publishMessage('generateProductPdfs', { slug: updatedMapping[id].slug }));
@@ -53,6 +57,10 @@ const sitePublish = async (req, res) => {
 
     if (newCmsItems !== null) {
       newCmsItems.forEach(id => {
+        if (!updatedMapping[id].slug) {
+          console.error(`Skipping item with ID ${id} due to missing slug`);
+          return;
+        }
         savedMapping[id] = updatedMapping[id];
         toProcess.push(publishMessage('processCmsItem', { id: id, imgUrl: updatedMapping[id].imgUrl }));
         toProcess.push(publishMessage('generateProductPdfs', { slug: updatedMapping[id].slug }));
