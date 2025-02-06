@@ -6,7 +6,7 @@ const checkForDeletions = require('./helpers/checkForDeletions');
 const checkforNewItems = require('./helpers/checkforNewItems');
 const checkForUpdatedItems = require('./helpers/checkForUpdatedItems');
 const deleteCmsItem = require('./helpers/deleteCmsItem');
-const processCmsItem = require('./helpers/processCmsItem');
+// const processCmsItem = require('./helpers/processCmsItem');
 const createProductPdfs = require('./helpers/createProductPdfs');
 
 
@@ -56,7 +56,7 @@ const sitePublish = async (req, res) => {
             return;
           }
           savedMapping[id] = item;
-          await processCmsItem(id, item.imgUrl);
+          // await processCmsItem(id, item.imgUrl);
           await createProductPdfs(item.slug);
         })
       );
@@ -74,7 +74,7 @@ const sitePublish = async (req, res) => {
             return;
           }
           savedMapping[id] = item;
-          await processCmsItem(id, item.imgUrl);
+          // await processCmsItem(id, item.imgUrl);
           await createProductPdfs(item.slug);
         })
       );

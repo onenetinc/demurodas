@@ -26,6 +26,14 @@ const processCmsItem = async (id, imgUrl) => {
         }
       });
 
+      console.log("Processing CMS Item - ID:", id);
+      console.log("Received imgUrl:", imgUrl);
+
+      if (!imgUrl) {
+        throw new Error("Invalid or missing imgUrl");
+      }
+
+
       console.log("ERROR 1");
       const fileName = await downloadImage(imgUrl, id);
       console.log("ERROR 2");
