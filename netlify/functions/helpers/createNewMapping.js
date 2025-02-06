@@ -2,7 +2,8 @@ const createNewMapping = (cmsCollectionItems) => {
 
     let result = {};
 
-    cmsCollectionItems.forEach(item => {
+    cmsCollectionItems.forEach(localItem => {
+        const item = localItem.fieldData;
 
         const primaryImgUrl = item.hasOwnProperty('primary-image') ? item['primary-image'].url : null;
         const masonryImgUrl = item.hasOwnProperty('masonry-grid-image') ? item['masonry-grid-image'].url : null;
@@ -12,11 +13,11 @@ const createNewMapping = (cmsCollectionItems) => {
         const category = item.category2 ? item.category2 : null;
         const subcategory = item.subcategory ? item.subcategory : null;
 
-        result[item._id] = {
+        result[localItem.id] = {
             imgUrl: imgUrl,
             slug: item.slug,
-            updatedOn: item['updated-on'],
-            publishedOn: item['published-on'],
+            updatedOn: localItem['lastUpdated'],
+            publishedOn: localItem['lastPublished'],
             new: newBool,
             processed: false,
             category: category,

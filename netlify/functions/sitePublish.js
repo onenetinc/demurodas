@@ -5,92 +5,88 @@ const createNewMapping = require('./helpers/createNewMapping');
 const checkForDeletions = require('./helpers/checkForDeletions');
 const checkforNewItems = require('./helpers/checkforNewItems');
 const checkForUpdatedItems = require('./helpers/checkForUpdatedItems');
-const publishMessage = require('./helpers/publishMessage');
+const deleteCmsItem = require('./helpers/deleteCmsItem');
+const processCmsItem = require('./helpers/processCmsItem');
+const createProductPdfs = require('./helpers/createProductPdfs');
+
 
 const sitePublish = async (req, res) => {
   try {
-    console.log(`Webflow site was published, processing any changes to the Products CMS collection...`);
+    console.log(`Webflow site was published, processing changes to the Products CMS collection...`);
 
-    const proms = [
+    const [currentCmsItems, savedMapping] = await Promise.all([
       getWfItems(),
       getMapping(db)
-    ];
+    ]);
 
-    const results = await Promise.all(proms);
-
-    const currentCmsItems = results[0];
-    const savedMapping = results[1];
     const updatedMapping = createNewMapping(currentCmsItems);
+
+    console.log("currentCmsItems:", currentCmsItems.length);
+    console.log("savedMapping:", savedMapping);
 
     let toProcess = [];
 
+    /** 🔹 HANDLE DELETIONS **/
     const deletions = checkForDeletions(savedMapping, updatedMapping);
-
-    if (deletions !== null) {
-      deletions.forEach(id => {
-        const imgUrl = savedMapping[id].imgUrl;
-        if (imgUrl) {
-          const parts = imgUrl.split('.');
-          const extension = parts.pop();
-          const fileName = id + '.' + extension;
-          toProcess.push(publishMessage('deleteCmsItem', { fileName: fileName }));
-        }
-        delete savedMapping[id];
-      });
+    if (deletions && deletions.length > 0) {
+      console.log(`Processing ${deletions.length} deletions...`);
+      await Promise.all(
+        deletions.map(async (id) => {
+          const imgUrl = savedMapping[id]?.imgUrl;
+          if (imgUrl) {
+            const extension = imgUrl.split('.').pop();
+            const fileName = `${id}.${extension}`;
+            await deleteCmsItem(fileName);
+            console.log(`Deleted CMS item: ${fileName}`);
+          }
+          delete savedMapping[id];
+        })
+      );
     }
 
+    /** 🔹 HANDLE UPDATES **/
     const updatedCmsItems = checkForUpdatedItems(savedMapping, updatedMapping);
-
-    if (updatedCmsItems !== null) {
-      updatedCmsItems.forEach(id => {
-        if (!updatedMapping[id].slug) {
-          console.error(`Skipping item with ID ${id} due to missing slug`);
-          return;
-        }
-        savedMapping[id] = updatedMapping[id];
-        toProcess.push(publishMessage('processCmsItem', { id: id, imgUrl: updatedMapping[id].imgUrl }));
-        toProcess.push(publishMessage('generateProductPdfs', { slug: updatedMapping[id].slug }));
-      });
+    if (updatedCmsItems && updatedCmsItems.length > 0) {
+      console.log(`Processing ${updatedCmsItems.length} updated items...`);
+      await Promise.all(
+        updatedCmsItems.map(async (id) => {
+          const item = updatedMapping[id];
+          if (!item.slug) {
+            console.error(`Skipping item with ID ${id} due to missing slug`);
+            return;
+          }
+          savedMapping[id] = item;
+          await processCmsItem(id, item.imgUrl);
+          await createProductPdfs(item.slug);
+        })
+      );
     }
 
+    /** 🔹 HANDLE NEW ITEMS **/
     const newCmsItems = checkforNewItems(savedMapping, updatedMapping);
-
-    if (newCmsItems !== null) {
-      newCmsItems.forEach(id => {
-        if (!updatedMapping[id].slug) {
-          console.error(`Skipping item with ID ${id} due to missing slug`);
-          return;
-        }
-        savedMapping[id] = updatedMapping[id];
-        toProcess.push(publishMessage('processCmsItem', { id: id, imgUrl: updatedMapping[id].imgUrl }));
-        toProcess.push(publishMessage('generateProductPdfs', { slug: updatedMapping[id].slug }));
-      });
+    if (newCmsItems && newCmsItems.length > 0) {
+      console.log(`Processing ${newCmsItems.length} new items...`);
+      await Promise.all(
+        newCmsItems.map(async (id) => {
+          const item = updatedMapping[id];
+          if (!item.slug) {
+            console.error(`Skipping item with ID ${id} due to missing slug`);
+            return;
+          }
+          savedMapping[id] = item;
+          await processCmsItem(id, item.imgUrl);
+          await createProductPdfs(item.slug);
+        })
+      );
     }
 
+    /** 🔹 UPDATE FIRESTORE **/
     await db.collection('cmsMapping').doc('items').set(savedMapping);
-
-    console.log(`To process: ${toProcess.length}`);
-
-    if (newCmsItems) {
-      console.log(`New items: ${newCmsItems.length}`);
-    }
-
-    if (updatedCmsItems) {
-      console.log(`Updated items: ${updatedCmsItems.length}`);
-    }
-
-    if (deletions) {
-      console.log(`Deleted items: ${deletions.length}`);
-    }
-
-    if (toProcess.length > 0) {
-      await Promise.all(toProcess);
-      console.log(`Sent all messages`);
-    }
+    console.log(`Updated Firestore CMS mapping with ${Object.keys(savedMapping).length} items`);
 
     return res.status(200).send('Site publish processed successfully');
   } catch (err) {
-    console.error(err);
+    console.error('Error in sitePublish:', err);
     return res.status(500).send('Internal Server Error');
   }
 };

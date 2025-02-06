@@ -20,6 +20,7 @@ const getMapping = (db) => {
 
                     const data = await doc.data();
                     console.log(`Retrieved CMS mapping`);
+                    console.log("CMS mapping data: ", data);
                     resolve(data);
 
                 }
