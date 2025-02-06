@@ -7,7 +7,7 @@ const generatePdf = require('./generatePdf');
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-const chromium = require('chrome-aws-lambda');
+const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
 
 

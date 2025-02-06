@@ -36,6 +36,7 @@ module.exports = {
         'chrome-aws-lambda': 'commonjs chrome-aws-lambda',
         'utf-8-validate': 'commonjs utf-8-validate',
         'puppeteer-core': 'commonjs puppeteer-core',
+        '@sparticuz/chromium': 'commonjs @sparticuz/chromium',
         yargs: 'commonjs yargs',
         'yargs-parser': 'commonjs yargs-parser'
     },
