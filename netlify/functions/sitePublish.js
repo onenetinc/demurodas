@@ -15,7 +15,7 @@ const sitePublish = async (req, res) => {
   try {
     console.log(`Webflow site was published, processing changes to the Products CMS collection...`);
 
-    const [currentCmsItems, savedMapping] = await Promise.all([
+    let [currentCmsItems, savedMapping] = await Promise.all([
       getWfItems(),
       getMapping(db)
     ]);
@@ -23,9 +23,15 @@ const sitePublish = async (req, res) => {
     const updatedMapping = createNewMapping(currentCmsItems);
 
     console.log("currentCmsItems:", currentCmsItems.length);
-    console.log("savedMapping:", savedMapping);
 
-    let toProcess = [];
+    // check if savedMapping is empty
+    if (Object.keys(savedMapping).length === 0) {
+      Object.assign(savedMapping, updatedMapping);
+      console.log("First-time setup: savedMapping initialized. Skipping updates & new items.");
+      await db.collection('cmsMapping').doc('items').set(savedMapping);
+      return res.status(200).send('Initial mapping setup completed');
+    }
+    console.log("savedMapping:", savedMapping);
 
     /** 🔹 HANDLE DELETIONS **/
     const deletions = checkForDeletions(savedMapping, updatedMapping);
