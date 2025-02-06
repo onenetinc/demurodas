@@ -40,19 +40,18 @@ const createProductPdfs = async (slug) => {
 
       console.log('Opening browser');
 
-      // const executablePath = await chromium.executablePath;
-      // const executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-      const executablePath = await chromium.executablePath('/var/task/node_modules/@sparticuz/chromium/bin') || '/tmp/chromium';
       
+      const executablePath = await chromium.executablePath('/var/task/node_modules/@sparticuz/chromium/bin') || '/tmp/chromium';
+
       console.log(`Chromium Executable Path: ${executablePath}`);
+      
       if (!executablePath) {
         console.log('No executable path found!');
       }
-
-
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       chromium.setHeadlessMode = true;
+      chromium.setGraphicsMode = false;
 
       const browser = await puppeteer.launch({
         executablePath: executablePath || '/usr/bin/chromium-browser',
@@ -60,12 +59,12 @@ const createProductPdfs = async (slug) => {
         // args: [
         //   '--no-sandbox',
         //   '--disable-setuid-sandbox',
-        //   '--disable-dev-shm-usage',
-        //   '--disable-accelerated-2d-canvas',
-        //   '--disable-gpu',
-        //   '--no-first-run',
-        //   '--no-zygote',
-        //   '--single-process'
+        //   // '--disable-dev-shm-usage',
+        //   // '--disable-accelerated-2d-canvas',
+        //   // '--disable-gpu',
+        //   // '--no-first-run',
+        //   // '--no-zygote',
+        //   // '--single-process'
         // ],
         defaultViewport: chromium.defaultViewport,
         headless: chromium.headless

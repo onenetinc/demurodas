@@ -31,7 +31,7 @@ const sitePublish = async (req, res) => {
       await db.collection('cmsMapping').doc('items').set(savedMapping);
       return res.status(200).send('Initial mapping setup completed');
     }
-    console.log("savedMapping:", savedMapping);
+    // console.log("savedMapping:", savedMapping);
 
     /** 🔹 HANDLE DELETIONS **/
     const deletions = checkForDeletions(savedMapping, updatedMapping);
