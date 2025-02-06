@@ -41,7 +41,8 @@ const createProductPdfs = async (slug) => {
       console.log('Opening browser');
 
       // const executablePath = await chromium.executablePath;
-      const executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+      // const executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+      const executablePath = chromium.executablePath;
       
       console.log(`Chromium Executable Path: ${executablePath}`);
       if (!executablePath) {
