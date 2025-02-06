@@ -33,6 +33,7 @@ module.exports = {
         // 'firebase-functions': 'commonjs firebase-functions',
         'webflow-api': 'commonjs webflow-api',
         'bufferutil': 'commonjs bufferutil',
+        'chrome-aws-lambda': 'commonjs chrome-aws-lambda',
         'utf-8-validate': 'commonjs utf-8-validate',
         puppeteer: 'commonjs puppeteer',
         'puppeteer-core': 'commonjs puppeteer-core',

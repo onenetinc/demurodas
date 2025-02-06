@@ -2,11 +2,13 @@ const { db, bucket } = require('./firebase');
 const getAppSettings = require('./getAppSettings');
 const getRandomId = require('./getRandomId');
 const getProductPricing = require('./getProductPricing');
-const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer');
 const generatePdf = require('./generatePdf');
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
+const chromium = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer-core');
 
 
 const createProductPdfs = async (slug) => {
@@ -39,6 +41,7 @@ const createProductPdfs = async (slug) => {
       console.log('Opening browser');
 
       const browser = await puppeteer.launch({
+        executablePath: await chromium.executablePath,
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
@@ -48,7 +51,9 @@ const createProductPdfs = async (slug) => {
           '--no-first-run',
           '--no-zygote',
           '--single-process'
-        ]
+        ],
+        defaultViewport: chromium.defaultViewport,
+        headless: chromium.headless
       });
       const page = await browser.newPage();
       await page.setViewport({
