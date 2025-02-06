@@ -42,12 +42,15 @@ const createProductPdfs = async (slug) => {
 
       // const executablePath = await chromium.executablePath;
       // const executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-      const executablePath = await chromium.executablePath();
+      const executablePath = await chromium.executablePath() || '/tmp/chromium';
       
       console.log(`Chromium Executable Path: ${executablePath}`);
       if (!executablePath) {
         console.log('No executable path found!');
       }
+
+
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       const browser = await puppeteer.launch({
         executablePath: executablePath || '/usr/bin/chromium-browser',
@@ -59,7 +62,7 @@ const createProductPdfs = async (slug) => {
           '--disable-gpu',
           '--no-first-run',
           '--no-zygote',
-          // '--single-process'
+          '--single-process'
         ],
         defaultViewport: chromium.defaultViewport,
         headless: chromium.headless
