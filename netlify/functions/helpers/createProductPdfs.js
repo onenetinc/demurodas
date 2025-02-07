@@ -68,10 +68,11 @@ const createProductPdfs = async (slug) => {
           '--hide-scrollbars',
           '--disable-background-networking',
           '--disable-software-rasterizer',
-          '--no-zygote',
-          '--single-process',
+          '--disable-extensions',
+          '--disable-sync',        
         ],
       });
+
 
       const page = await browser.newPage();
       await page.setViewportSize({ width: 1420, height: 2000 });
