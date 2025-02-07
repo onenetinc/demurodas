@@ -62,32 +62,32 @@ const createProductPdfs = async (slug) => {
           '--disable-dev-shm-usage',
           '--disable-accelerated-2d-canvas',
           '--disable-gpu',
-          '--disable-background-timer-throttling',
-          '--disable-background-networking',
-          '--disable-software-rasterizer',
-          '--disable-renderer-backgrounding',
-          '--disable-backgrounding-occluded-windows',
+          '--single-process',
           '--disable-features=site-per-process',
           '--disable-translate',
           '--disable-sync',
-          '--disable-3d-apis', // ✅ Further reduces rendering load
-          '--disable-site-isolation-trials', // ✅ Prevents multi-process issues
+          '--no-zygote',
         ],
       });
 
-
-
       if (!browser) {
-        console.error("❌ ERROR: Playwright browser failed to launch!");
-        reject({ statusCode: 500, body: JSON.stringify({ message: "Failed to launch browser." }) });
+        console.error("❌ ERROR: Browser instance is NULL! Chromium may have crashed.");
+        reject({
+          statusCode: 500,
+          body: JSON.stringify({ message: "Browser failed to launch. Check memory usage." })
+        });
         return;
       }
-      console.log("✅ Browser launched successfully, creating new page...");
-      const page = await browser.newPage();
-      const backgroundPage = await browser.newPage();
-      await backgroundPage.evaluate(() => new Promise(resolve => setTimeout(resolve, 60000))); // ✅ Keeps Playwright alive
 
-      await new Promise(resolve => setTimeout(resolve, 4000));
+      console.log("✅ Browser launched successfully. Creating a background page...");
+      const backgroundPage = await browser.newPage(); // ✅ Keeps Playwright from closing early
+      await backgroundPage.evaluate(() => new Promise(resolve => setTimeout(resolve, 60000))); // ✅ Keeps browser alive
+
+      console.log("✅ Browser is stable. Creating new page...");
+      await new Promise(resolve => setTimeout(resolve, 2000)); // ✅ Delay to ensure stability
+
+      const page = await browser.newPage();
+      console.log("✅ Successfully created a new page.");
       await page.setViewportSize({ width: 1420, height: 2000 });
 
       // **Retry page.goto() in case of failures**
