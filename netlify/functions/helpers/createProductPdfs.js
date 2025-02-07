@@ -55,8 +55,8 @@ const createProductPdfs = async (slug) => {
       // Launch Playwright browser
       const BROWSERLESS_API_KEY = "RjRbvDDTnIm2vN2d0126163c4ba7de95be0a42f050";
 
-      browser = await playwrightChromium.connectOverCDP(`wss://chrome.browserless.io?token=${BROWSERLESS_API_KEY}`);
-
+      const browserURL = `wss://chrome.browserless.io?token=${BROWSERLESS_API_KEY}&--keep-alive=true&--timeout=60000`;
+      browser = await playwrightChromium.connectOverCDP(browserURL);
 
       if (!browser) {
         console.error("❌ ERROR: Browser instance is NULL! Chromium may have crashed.");
@@ -67,12 +67,7 @@ const createProductPdfs = async (slug) => {
         return;
       }
 
-      console.log("✅ Browser launched successfully. Creating a background page...");
-      const backgroundPage = await browser.newPage(); // ✅ Keeps Playwright from closing early
-      await backgroundPage.evaluate(() => new Promise(resolve => setTimeout(resolve, 60000))); // ✅ Keeps browser alive
-
       console.log("✅ Browser is stable. Creating new page...");
-      await new Promise(resolve => setTimeout(resolve, 2000)); // ✅ Delay to ensure stability
 
       const page = await browser.newPage();
       console.log("✅ Successfully created a new page.");
