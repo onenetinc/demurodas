@@ -62,18 +62,19 @@ const createProductPdfs = async (slug) => {
           '--disable-dev-shm-usage',
           '--disable-accelerated-2d-canvas',
           '--disable-gpu',
-          '--no-first-run',
+          '--disable-background-timer-throttling',
+          '--disable-background-networking',
           '--disable-software-rasterizer',
           '--disable-renderer-backgrounding',
           '--disable-backgrounding-occluded-windows',
-          '--disable-background-networking',
-          '--disable-extensions',
-          '--disable-sync',
-          '--single-process',
-          '--disable-translate',
           '--disable-features=site-per-process',
+          '--disable-translate',
+          '--disable-sync',
+          '--disable-3d-apis', // ✅ Further reduces rendering load
+          '--disable-site-isolation-trials', // ✅ Prevents multi-process issues
         ],
       });
+
 
 
       if (!browser) {
@@ -83,7 +84,10 @@ const createProductPdfs = async (slug) => {
       }
       console.log("✅ Browser launched successfully, creating new page...");
       const page = await browser.newPage();
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const backgroundPage = await browser.newPage();
+      await backgroundPage.evaluate(() => new Promise(resolve => setTimeout(resolve, 60000))); // ✅ Keeps Playwright alive
+
+      await new Promise(resolve => setTimeout(resolve, 4000));
       await page.setViewportSize({ width: 1420, height: 2000 });
 
       // **Retry page.goto() in case of failures**
@@ -93,7 +97,7 @@ const createProductPdfs = async (slug) => {
         try {
           await page.goto(`https://demurodas.webflow.io/products/${slug}?mode=server`, {
             waitUntil: 'load', // ✅ More stable than 'networkidle' in Netlify
-            timeout: 20000,
+            timeout: 10000,
           });
           console.log('✅ Page loaded successfully.');
           break;
