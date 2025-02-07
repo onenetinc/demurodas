@@ -55,17 +55,16 @@ const createProductPdfs = async (slug) => {
 
       const browser = await puppeteer.launch({
         executablePath: executablePath || '/usr/bin/chromium-browser',
-        args: chromium.args,
-        // args: [
-        //   '--no-sandbox',
-        //   '--disable-setuid-sandbox',
-        //   // '--disable-dev-shm-usage',
-        //   // '--disable-accelerated-2d-canvas',
-        //   // '--disable-gpu',
-        //   // '--no-first-run',
-        //   // '--no-zygote',
-        //   // '--single-process'
-        // ],
+        // args: chromium.args,
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-accelerated-2d-canvas',
+          '--disable-gpu',
+          '--single-process',
+          '--no-zygote',
+        ],
         defaultViewport: chromium.defaultViewport,
         headless: chromium.headless
       });
@@ -75,7 +74,7 @@ const createProductPdfs = async (slug) => {
         height: 2000
       });
       await page.goto(`https://demurodas.webflow.io/products/${slug}?mode=server`, {
-        waitUntil: 'load',
+        waitUntil: 'networkidle2',
         timeout: 0
       });
 
