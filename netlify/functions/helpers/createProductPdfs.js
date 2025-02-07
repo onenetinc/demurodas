@@ -53,31 +53,38 @@ const createProductPdfs = async (slug) => {
       console.log("✅ Chromium is correctly installed and executable.");
 
       // Launch Playwright browser
-      const browser = await playwrightChromium.launch({
+      browser = await playwrightChromium.launch({
         executablePath,
         headless: true,
         args: [
-          '--disable-gpu',
           '--no-sandbox',
           '--disable-setuid-sandbox',
           '--disable-dev-shm-usage',
           '--disable-accelerated-2d-canvas',
-          '--disable-web-security',
+          '--disable-gpu',
           '--no-first-run',
-          '--mute-audio',
-          '--hide-scrollbars',
-          '--disable-background-networking',
           '--disable-software-rasterizer',
+          '--disable-renderer-backgrounding',
+          '--disable-backgrounding-occluded-windows',
+          '--disable-background-networking',
           '--disable-extensions',
-          '--disable-sync',        
+          '--disable-sync',
+          '--single-process',
+          '--disable-translate',
+          '--disable-features=site-per-process',
         ],
       });
 
 
+      if (!browser) {
+        console.error("❌ ERROR: Playwright browser failed to launch!");
+        reject({ statusCode: 500, body: JSON.stringify({ message: "Failed to launch browser." }) });
+        return;
+      }
+      console.log("✅ Browser launched successfully, creating new page...");
       const page = await browser.newPage();
+      await new Promise(resolve => setTimeout(resolve, 2000));
       await page.setViewportSize({ width: 1420, height: 2000 });
-      // **Ensure Chromium fully loads before navigation**
-      await new Promise(resolve => setTimeout(resolve, 1000));
 
       // **Retry page.goto() in case of failures**
       let maxRetries = 3;
