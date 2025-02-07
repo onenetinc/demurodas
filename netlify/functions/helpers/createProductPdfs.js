@@ -34,23 +34,62 @@ const createProductPdfs = async (slug) => {
       let privPath = backendMode === 'production' ? 'pdfs-priv' : 'pdfs-priv-staging';
 
       const fileName = getRandomId();
-      console.log('🚀 Connecting to Browserless...');
+      console.log('Opening browser');
 
-      // ✅ Connect to Browserless (No local Chromium needed)
-      const browserURL = `wss://chrome.browserless.io?token=RjRbvDDTnIm2vN2d0126163c4ba7de95be0a42f050&--keep-alive=true`;
+      // Get Chromium executable path
+      const executablePath = await chromium.executablePath();
+
+      console.log(`Chromium Executable Path: ${executablePath}`);
+
+      if (!executablePath) {
+        console.error("❌ ERROR: Chromium executable path is invalid! Exiting...");
+        reject({
+          statusCode: 500,
+          body: JSON.stringify({ message: "Chromium executable not found. Aborting." })
+        });
+        return;
+      }
+
+      console.log("✅ Chromium is correctly installed and executable.");
+
+      // Launch Playwright browser
+      const BROWSERLESS_API_KEY = "RjRbvDDTnIm2vN2d0126163c4ba7de95be0a42f050";
+
+      const browserURL = `wss://chrome.browserless.io?token=${BROWSERLESS_API_KEY}&--keep-alive=true&--timeout=60000`;
       browser = await playwrightChromium.connectOverCDP(browserURL);
 
-      if (!browser) throw new Error('❌ Failed to connect to Browserless');
+      if (!browser) {
+        console.error("❌ ERROR: Browser instance is NULL! Chromium may have crashed.");
+        reject({
+          statusCode: 500,
+          body: JSON.stringify({ message: "Browser failed to launch. Check memory usage." })
+        });
+        return;
+      }
 
-      console.log("✅ Browser connected. Creating new page...");
+      console.log("✅ Browser is stable. Creating new page...");
+
       const page = await browser.newPage();
+      console.log("✅ Successfully created a new page.");
       await page.setViewportSize({ width: 1420, height: 2000 });
 
-      // 🌐 Navigate to the product page (Browserless optimizes load performance)
-      await page.goto(`https://demurodas.webflow.io/products/${slug}?mode=server`, {
-        waitUntil: 'load', // Stable for screenshots
-      });
-      console.log('✅ Page loaded');
+      // **Retry page.goto() in case of failures**
+      let maxRetries = 3;
+      let attempt = 0;
+      while (attempt < maxRetries) {
+        try {
+          await page.goto(`https://demurodas.webflow.io/products/${slug}?mode=server`, {
+            waitUntil: 'load', // ✅ More stable than 'networkidle' in Netlify
+            timeout: 10000,
+          });
+          console.log('✅ Page loaded successfully.');
+          break;
+        } catch (error) {
+          console.warn(`⚠️ Attempt ${attempt + 1} failed: ${error.message}`);
+          attempt++;
+          if (attempt === maxRetries) throw new Error('Failed to load page after multiple attempts');
+        }
+      }
 
       // Hide trade modal
       await page.evaluate(() => {
