@@ -33,20 +33,42 @@ const createProductPdfs = async (slug) => {
       const fileName = getRandomId();
       console.log('Opening browser');
 
-      // Chromium executable path
+      // Get Chromium executable path
       const executablePath = await chromium.executablePath();
+
+// Log Chromium path
       console.log(`Chromium Executable Path: ${executablePath}`);
+
+// Check if Chromium path is valid
+      if (!executablePath) {
+        console.error("❌ ERROR: Chromium executable path is invalid! Exiting...");
+        reject({
+          statusCode: 500,
+          body: JSON.stringify({ message: "Chromium executable not found. Aborting." })
+        });
+        return;
+      }
+      else {
+        console.log("✅ Chromium is correctly installed and executable.");
+      }
 
       // Launch Playwright browser
       const browser = await playwrightChromium.launch({
         executablePath,
         headless: true,
         args: [
+          '--disable-gpu',
           '--no-sandbox',
           '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
           '--single-process',
-          '--no-zygote',
+          '--disable-dev-shm-usage',
+          '--disable-accelerated-2d-canvas',
+          '--disable-web-security',
+          '--no-first-run',
+          '--mute-audio',
+          '--hide-scrollbars',
+          '--disable-background-networking',
+          '--disable-software-rasterizer',
         ],
       });
 

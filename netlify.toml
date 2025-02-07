@@ -13,7 +13,7 @@
   external_node_modules = ["playwright", "@sparticuz/chromium"]
 
 [functions."*"]
-  timeout = 26
+  timeout = 30
 
 [functions.checkForApprovals]
   schedule = "@daily"
