@@ -77,7 +77,7 @@ const createProductPdfs = async (slug) => {
       await page.setViewportSize({ width: 1420, height: 2000 });
       // **Ensure Chromium fully loads before navigation**
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // **Retry page.goto() in case of failures**
       let maxRetries = 3;
       let attempt = 0;
