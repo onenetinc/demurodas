@@ -9,7 +9,7 @@ const os = require('os');
 const fs = require('fs');
 const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
-
+// force push
 
 const createProductPdfs = async (slug) => {
   return new Promise(async (resolve, reject) => {
@@ -44,7 +44,7 @@ const createProductPdfs = async (slug) => {
       const executablePath = await chromium.executablePath('/var/task/node_modules/@sparticuz/chromium/bin') || '/tmp/chromium';
 
       console.log(`Chromium Executable Path: ${executablePath}`);
-      
+
       if (!executablePath) {
         console.log('No executable path found!');
       }
