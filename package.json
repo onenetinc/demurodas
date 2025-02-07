@@ -33,7 +33,7 @@
     "node-fetch": "^2.6.7",
     "nodemailer": "^6.9.13",
     "pdfkit": "^0.13.0",
-    "puppeteer-core": "^20.1.1",
+    "playwright": "^1.50.1",
     "typescript": "^5.7.3",
     "utf-8-validate": "^6.0.4",
     "webflow-api": "^2.3.2"
