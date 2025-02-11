@@ -11,13 +11,15 @@ exports.handler = async () => {
     console.log("✅ Connected to Browserless!");
 
     console.log("🌐 Creating a new page...");
-    const page = await browser.newPage();
-    console.log("✅ Successfully created a new page.");
+    const context = await browser.newContext({
+      extraHTTPHeaders: {
+        "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      },
+    });
 
-    // **🛠 Set a Real User-Agent (Avoid Bot Blocking)**
-    await page.setUserAgent(
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    );
+    const page = await context.newPage();
+    console.log("✅ Successfully created a new page.");
 
     // **💡 Test URL**
     const productSlug = "athena-side-table"; // Change slug dynamically later
