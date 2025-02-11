@@ -2,7 +2,7 @@ const { chromium } = require("playwright");
 
 exports.handler = async () => {
   console.log("🚀 Connecting to Browserless...");
-  const BROWSERLESS_API_KEY = "RjRbvDDTnIm2vN2d0126163c4ba7de95be0a42f050";
+  const BROWSERLESS_API_KEY = "...";
   const browserURL = `wss://chrome.browserless.io?token=${BROWSERLESS_API_KEY}&--keep-alive=true`;
 
   try {
@@ -23,14 +23,20 @@ exports.handler = async () => {
 
     // **💡 Test URL**
     const productSlug = "athena-side-table"; // Change slug dynamically later
-    const testURL = `https://destinationvancouver.com/`;
+    const testURL = `https://demurodas.webflow.io/products/${productSlug}?mode=server`;
 
-    console.log(`🌍 Navigating to ${testURL}...`);
-
-    await page.goto(testURL, {
+    if (!response.ok()) {
+      console.error("❌ ERROR: Webflow returned an error page:", response.status(), response.statusText());
+      return {
+        statusCode: response.status(),
+        body: JSON.stringify({ message: "Webflow blocked the request", status: response.status() }),
+      };
+    }
+    const response = await page.goto(testURL, {
       waitUntil: "load", // ✅ Ensures full page render
       timeout: 20000, // ⏳ Increase timeout for slow pages
     });
+    console.log("🔍 Response status:", response.status());
 
     console.log("✅ Page loaded successfully.");
 
