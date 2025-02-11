@@ -2,7 +2,7 @@ const { chromium } = require("playwright");
 
 exports.handler = async () => {
   console.log("🚀 Connecting to Browserless...");
-  const BROWSERLESS_API_KEY = "...";
+  const BROWSERLESS_API_KEY = "RjRbvDDTnIm2vN2d0126163c4ba7de95be0a42f050";
   const browserURL = `wss://chrome.browserless.io?token=${BROWSERLESS_API_KEY}&--keep-alive=true`;
 
   try {
