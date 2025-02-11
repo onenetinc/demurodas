@@ -11,6 +11,9 @@ const { chromium: playwrightChromium } = require('playwright');
 
 const createProductPdfs = async (slug) => {
   return new Promise(async (resolve, reject) => {
+    console.log("🔍 Netlify Function Type:", process.env.NETLIFY_FUNCTIONS);
+    console.log(`📌 Received request to generate PDFs for: ${slug}`);
+
     let browser;
     let tempFiles = [];
 
@@ -38,7 +41,20 @@ const createProductPdfs = async (slug) => {
       const BROWSERLESS_API_KEY = "RjRbvDDTnIm2vN2d0126163c4ba7de95be0a42f050";
 
       const browserURL = `wss://chrome.browserless.io?token=${BROWSERLESS_API_KEY}&--disable-gpu&--no-sandbox&--disable-dev-shm-usage&--disable-accelerated-2d-canvas`;
-      browser = await playwrightChromium.connectOverCDP(browserURL);
+      console.log(`🌐 Browserless WebSocket URL: ${browserURL}`);
+
+      try {
+        console.log("🔄 Attempting to connect to Browserless...");
+        browser = await playwrightChromium.connectOverCDP(browserURL);
+        console.log("✅ Connected to Browserless!");
+      } catch (error) {
+        console.error("❌ ERROR: Failed to connect to Browserless:", error);
+        reject({
+          statusCode: 500,
+          body: JSON.stringify({ message: "Failed to connect to Browserless", error: error.message })
+        });
+        return;
+      }
 
       if (!browser) {
         console.error("❌ ERROR: Browser instance is NULL! Chromium may have crashed.");
@@ -56,6 +72,7 @@ const createProductPdfs = async (slug) => {
       await page.setViewportSize({ width: 1420, height: 2000 });
 
       // **Retry page.goto() in case of failures**
+      console.log("🌐 Navigating to product page...");
       let maxRetries = 3;
       let attempt = 0;
       while (attempt < maxRetries) {
