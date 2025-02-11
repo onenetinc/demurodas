@@ -20,6 +20,7 @@ module.exports = {
         userCreated: './netlify/functions/userCreated.js',
         userDeleted: './netlify/functions/userDeleted.js',
         hello: './netlify/functions/hello.js',
+        testbrowserless: './netlify/functions/testbrowserless.js',
     },
     output: {
         path: path.resolve(__dirname, 'netlify/functions/bundled'),
