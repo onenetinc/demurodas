@@ -32,11 +32,9 @@ module.exports = {
         'webflow-api': 'commonjs webflow-api',
         'bufferutil': 'commonjs bufferutil',
         'utf-8-validate': 'commonjs utf-8-validate',
-        'playwright': 'commonjs playwright',  // ✅ Use Playwright instead of Puppeteer
         '@sparticuz/chromium': 'commonjs @sparticuz/chromium',  // ✅ Ensure correct Chromium externalization
         yargs: 'commonjs yargs',
         'yargs-parser': 'commonjs yargs-parser',
-        "playwright-extra": "commonjs playwright-extra",
         "puppeteer-extra": "commonjs puppeteer-extra",
         "puppeteer-extra-plugin-stealth": "commonjs puppeteer-extra-plugin-stealth",
         "puppeteer": "commonjs puppeteer",
