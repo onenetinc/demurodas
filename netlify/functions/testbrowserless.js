@@ -9,13 +9,18 @@ exports.handler = async () => {
     console.log("🔄 Attempting to connect to Browserless...");
     const browser = await chromium.connectOverCDP(browserURL);
     console.log("✅ Connected to Browserless!");
+
+    console.log("🌐 Creating a new page...");
+    const page = await browser.newPage();
+    console.log("✅ Successfully created a new page.");
+
     await browser.close();
     return { statusCode: 200, body: "Test function completed successfully!" };
   } catch (error) {
-    console.error("❌ ERROR: Failed to connect to Browserless:", error);
+    console.error("❌ ERROR: Failed:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: "Failed to connect to Browserless", error: error.message }),
+      body: JSON.stringify({ message: "Error occurred", error: error.message }),
     };
   }
 };
