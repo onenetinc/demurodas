@@ -21,6 +21,7 @@ module.exports = {
         userDeleted: './netlify/functions/userDeleted.js',
         hello: './netlify/functions/hello.js',
         testbrowserless: './netlify/functions/testbrowserless.js',
+        test2: './netlify/functions/test2.js',
     },
     output: {
         path: path.resolve(__dirname, 'netlify/functions/bundled'),
