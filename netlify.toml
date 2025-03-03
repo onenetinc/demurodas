@@ -10,7 +10,7 @@
 
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = ["@sparticuz/chromium", "puppeteer-core", "kind-of", "puppeteer"]
+  external_node_modules = ["@sparticuz/chromium", "puppeteer-core", "kind-of"]
 
 [functions."*"]
   timeout = 30
