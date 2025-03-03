@@ -13,6 +13,7 @@ module.exports = {
         getProfile: './netlify/functions/getProfile.js',
         loadGridData: './netlify/functions/loadGridData.js',
         resetPassword: './netlify/functions/resetPassword.js',
+        updateProfile: './netlify/functions/updateProfile.js',
         signUp: './netlify/functions/signUp.js',
         sitePublish: './netlify/functions/sitePublish.js',
         updateProfile: './netlify/functions/updateProfile.js',
@@ -28,11 +29,14 @@ module.exports = {
     },
     target: 'node',  // Target node environment for Netlify functions
     externals: {
+        // 'firebase-admin': 'commonjs firebase-admin',
+        // 'firebase-functions': 'commonjs firebase-functions',
         'webflow-api': 'commonjs webflow-api',
         'bufferutil': 'commonjs bufferutil',
+        'chrome-aws-lambda': 'commonjs chrome-aws-lambda',
         'utf-8-validate': 'commonjs utf-8-validate',
-        'playwright': 'commonjs playwright',  // ✅ Use Playwright instead of Puppeteer
-        '@sparticuz/chromium': 'commonjs @sparticuz/chromium',  // ✅ Ensure correct Chromium externalization
+        'puppeteer-core': 'commonjs puppeteer-core',
+        '@sparticuz/chromium': 'commonjs @sparticuz/chromium',
         yargs: 'commonjs yargs',
         'yargs-parser': 'commonjs yargs-parser'
     },
@@ -51,6 +55,10 @@ module.exports = {
         ],
     },
     resolve: {
-        fallback: {}
+        fallback: {
+            "fs": false,
+            "path": false,
+            "os": false
+        }
     }
 };

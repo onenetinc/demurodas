@@ -2,16 +2,12 @@
   functions = "netlify/functions/bundled"
   publish = "public"
 
-[build.environment]
-  NODE_VERSION = "18" # Correct way to set Node.js version
-
 [[plugins]]
   package = "@netlify/plugin-functions-install-core"
 
-[functions]
-  node_bundler = "esbuild"
-  external_node_modules = ["playwright", "@sparticuz/chromium"]
-  timeout = 26
-
 [functions.checkForApprovals]
   schedule = "@daily"
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["@sparticuz/chromium"]
