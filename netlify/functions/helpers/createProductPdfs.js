@@ -53,10 +53,22 @@ const createProductPdfs = async (slug) => {
       console.log("✅ Chromium is correctly installed and executable.");
 
       // Launch Playwright browser
-      const BROWSERLESS_API_KEY = "RjRbvDDTnIm2vN2d0126163c4ba7de95be0a42f050";
-
-      browser = await playwrightChromium.connectOverCDP(`wss://chrome.browserless.io?token=${BROWSERLESS_API_KEY}`);
-
+      browser = await playwrightChromium.launch({
+        executablePath,
+        headless: true,
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-accelerated-2d-canvas',
+          '--disable-gpu',
+          '--single-process',
+          '--disable-features=site-per-process',
+          '--disable-translate',
+          '--disable-sync',
+          '--no-zygote',
+        ],
+      });
 
       if (!browser) {
         console.error("❌ ERROR: Browser instance is NULL! Chromium may have crashed.");
