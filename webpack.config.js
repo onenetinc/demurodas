@@ -38,7 +38,8 @@ module.exports = {
         'puppeteer-core': 'commonjs puppeteer-core',
         '@sparticuz/chromium': 'commonjs @sparticuz/chromium',
         yargs: 'commonjs yargs',
-        'yargs-parser': 'commonjs yargs-parser'
+        'yargs-parser': 'commonjs yargs-parser',
+        'node-fetch': 'commonjs node-fetch',
     },
     module: {
         rules: [
