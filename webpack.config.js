@@ -37,9 +37,7 @@ module.exports = {
         yargs: 'commonjs yargs',
         'yargs-parser': 'commonjs yargs-parser',
         "playwright-extra": "commonjs playwright-extra",
-        "puppeteer-extra": "commonjs puppeteer-extra",
         "puppeteer-extra-plugin-stealth": "commonjs puppeteer-extra-plugin-stealth",
-        "puppeteer": "commonjs puppeteer",
     },
     module: {
         rules: [
