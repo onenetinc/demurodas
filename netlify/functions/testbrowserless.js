@@ -14,20 +14,13 @@ exports.handler = async () => {
     const page = await browser.newPage();
     console.log("✅ Successfully created a new page.");
 
-    // **🛠 Set a Real User-Agent (Avoid Bot Blocking)**
-    await page.setUserAgent(
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    );
-
-    // **💡 Test URL**
+    //const testURL = "https://example.com"; // Change this later
     const productSlug = "athena-side-table"; // Change slug dynamically later
-    const testURL = `https://demurodas.webflow.io/products/${productSlug}?mode=server`;
-
-    console.log(`🌍 Navigating to ${testURL}...`);
+    const testURL = `https://demurodas.webflow.io/products/${productSlug}?mode=server`;    console.log(`🌍 Navigating to ${testURL}...`);
 
     await page.goto(testURL, {
-      waitUntil: "load", // ✅ Ensures full page render
-      timeout: 20000, // ⏳ Increase timeout for slow pages
+      waitUntil: "domcontentloaded",
+      timeout: 10000,
     });
 
     console.log("✅ Page loaded successfully.");
