@@ -53,7 +53,7 @@ const createProductPdfs = async (slug) => {
       console.log("✅ Chromium is correctly installed and executable.");
 
       // Launch Playwright browser
-      const BROWSERLESS_API_KEY = "...";
+      const BROWSERLESS_API_KEY = "RjRbvDDTnIm2vN2d0126163c4ba7de95be0a42f050";
 
       const browserURL = `wss://chrome.browserless.io?token=${BROWSERLESS_API_KEY}&--keep-alive=true&--timeout=60000`;
       browser = await playwrightChromium.connectOverCDP(browserURL);
@@ -80,7 +80,7 @@ const createProductPdfs = async (slug) => {
         try {
           await page.goto(`https://demurodas.webflow.io/products/${slug}?mode=server`, {
             waitUntil: 'load', // ✅ More stable than 'networkidle' in Netlify
-            timeout: 8000,
+            timeout: 10000,
           });
           console.log('✅ Page loaded successfully.');
           break;
