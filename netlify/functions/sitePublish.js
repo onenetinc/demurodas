@@ -8,6 +8,7 @@ const checkForUpdatedItems = require('./helpers/checkForUpdatedItems');
 const deleteCmsItem = require('./helpers/deleteCmsItem');
 // const processCmsItem = require('./helpers/processCmsItem');
 const createProductPdfs = require('./helpers/createProductPdfs');
+const fetch = require('node-fetch');
 
 // force push 2
 
@@ -82,7 +83,15 @@ const sitePublish = async (req, res) => {
           }
           savedMapping[id] = item;
           // await processCmsItem(id, item.imgUrl);
-          await createProductPdfs(item.slug);
+          //await createProductPdfs(item.slug);
+          const pdfEndpoint = `https://screenshot-app-pearl.vercel.app/api/generateProductPdfs.js?slug=${slug}`;
+          fetch(pdfEndpoint)
+              .then(response => {
+                console.log(`Triggered PDF generation for ${slug} with status ${response.status}`);
+              })
+              .catch(error => {
+                console.error(`Error triggering PDF generation for ${slug}:`, error);
+              });
         })
       );
     }
@@ -177,7 +186,7 @@ exports.handler = async (event, context) => {
 //                     toProcess.push(publishMessage('deleteCmsItem', { fileName: fileName }));
 //                 }
 //                 delete savedMapping[id];
-                
+
 //             });
 
 //         }
