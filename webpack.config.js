@@ -36,7 +36,8 @@ module.exports = {
         yargs: 'commonjs yargs',
         'yargs-parser': 'commonjs yargs-parser',
         "puppeteer-core": "commonjs puppeteer-core",
-        'puppeteer': 'commonjs puppeteer'
+        'puppeteer': 'commonjs puppeteer',
+        'node-fetch': 'commonjs node-fetch'
     },
     module: {
         rules: [
