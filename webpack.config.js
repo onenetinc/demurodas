@@ -32,7 +32,7 @@ module.exports = {
         'webflow-api': 'commonjs webflow-api',
         'bufferutil': 'commonjs bufferutil',
         'utf-8-validate': 'commonjs utf-8-validate',
-        '@sparticuz/chromium': 'commonjs @sparticuz/chromium',  // ✅ Ensure correct Chromium externalization
+        '@sparticuz/chromium': 'commonjs @sparticuz/chromium',
         yargs: 'commonjs yargs',
         'yargs-parser': 'commonjs yargs-parser',
         "puppeteer-core": "commonjs puppeteer-core",
