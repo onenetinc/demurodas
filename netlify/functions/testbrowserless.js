@@ -23,7 +23,7 @@ exports.handler = async () => {
 
     // **💡 Test URL**
     const productSlug = "athena-side-table"; // Change slug dynamically later
-    const testURL = `https://google.com/`;
+    const testURL = `https://demurodas.webflow.io/products/${productSlug}?mode=server`;
 
     console.log(`🌍 Navigating to ${testURL}...`);
 
