@@ -1,7 +1,7 @@
 const chromium = require("@sparticuz/chromium");
 const puppeteer = require("puppeteer-core");
 
-exports.handler = async (event, context) => {
+module.exports = async (req, res) => {
   console.log("🚀 Connecting to Browserless...");
 
   let browser;
@@ -24,7 +24,7 @@ exports.handler = async (event, context) => {
     console.log("✅ Successfully created a new page.");
 
     // Accept a product slug from the query string, or default to 'athena-side-table'
-    const productSlug = event.queryStringParameters?.slug || "athena-side-table";
+    const productSlug = req.query.slug || "athena-side-table";
     const testURL = `https://demurodas.webflow.io/products/${productSlug}?mode=server`;
 
     console.log(`🌍 Navigating to ${testURL}...`);
@@ -36,21 +36,15 @@ exports.handler = async (event, context) => {
     console.log("✅ Page loaded successfully.");
     await browser.close();
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: "Navigation test completed successfully!",
-      }),
-    };
+    res.status(200).json({
+      message: "Navigation test completed successfully!",
+    });
   } catch (error) {
     console.error("❌ ERROR: Failed:", error);
     if (browser) await browser.close();
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        message: "Error occurred",
-        error: error.message,
-      }),
-    };
+    res.status(500).json({
+      message: "Error occurred",
+      error: error.message,
+    });
   }
 };
