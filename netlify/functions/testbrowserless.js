@@ -14,9 +14,8 @@ exports.handler = async () => {
     const page = await browser.newPage();
     console.log("✅ Successfully created a new page.");
 
-    //const testURL = "https://example.com"; // Change this later
-    const productSlug = "athena-side-table"; // Change slug dynamically later
-    const testURL = `https://demurodas.webflow.io/products/${productSlug}?mode=server`;    console.log(`🌍 Navigating to ${testURL}...`);
+    const testURL = "https://example.com"; // Change this later
+    console.log(`🌍 Navigating to ${testURL}...`);
 
     await page.goto(testURL, {
       waitUntil: "domcontentloaded",
