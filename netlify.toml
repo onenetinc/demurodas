@@ -9,9 +9,19 @@
   package = "@netlify/plugin-functions-install-core"
 
 [functions]
-  node_bundler = "none"
-  # node_bundler = "esbuild"
-  # external_node_modules = ["@sparticuz/chromium", "puppeteer-core", "kind-of", "puppeteer", "node-fetch"]
+  node_bundler = "esbuild"
+  external_node_modules = [
+    "webflow-api",
+    "bufferutil",
+    "utf-8-validate",
+    "@sparticuz/chromium",
+    "yargs",
+    "yargs-parser",
+    "puppeteer-core",
+    "puppeteer",
+    "node-fetch",
+    "kind-of"
+  ]
 
 [functions."*"]
   timeout = 30
