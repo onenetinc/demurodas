@@ -60,6 +60,7 @@ const createProductPdfs = async (slug) => {
           '--disable-gpu',
           '--no-sandbox',
           '--disable-setuid-sandbox',
+          '--single-process',
           '--disable-dev-shm-usage',
           '--disable-accelerated-2d-canvas',
           '--disable-web-security',
@@ -68,23 +69,19 @@ const createProductPdfs = async (slug) => {
           '--hide-scrollbars',
           '--disable-background-networking',
           '--disable-software-rasterizer',
-          '--no-zygote',
-          '--single-process',
         ],
       });
 
       const page = await browser.newPage();
       await page.setViewportSize({ width: 1420, height: 2000 });
-      // **Ensure Chromium fully loads before navigation**
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // **Retry page.goto() in case of failures**
       let maxRetries = 3;
       let attempt = 0;
       while (attempt < maxRetries) {
         try {
           await page.goto(`https://demurodas.webflow.io/products/${slug}?mode=server`, {
-            waitUntil: 'load', // ✅ More stable than 'networkidle' in Netlify
+            waitUntil: 'domcontentloaded', // ✅ Faster & more reliable in Netlify
             timeout: 20000,
           });
           console.log('✅ Page loaded successfully.');
