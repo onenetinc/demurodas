@@ -23,7 +23,7 @@ exports.handler = async () => {
 
     // **💡 Test URL**
     const productSlug = "athena-side-table"; // Change slug dynamically later
-    const testURL = `https://destinationvancouver.com/`;
+    const testURL = `https://google.com/`;
 
     console.log(`🌍 Navigating to ${testURL}...`);
 
