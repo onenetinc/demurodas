@@ -10,7 +10,7 @@
 
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = ["playwright", "@sparticuz/chromium", "playwright-extra", "puppeteer-extra-plugin-stealth", "kind-of"]
+  external_node_modules = ["playwright", "@sparticuz/chromium"]
 
 [functions."*"]
   timeout = 30
