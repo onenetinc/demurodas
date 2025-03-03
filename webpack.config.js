@@ -35,7 +35,7 @@ module.exports = {
         '@sparticuz/chromium': 'commonjs @sparticuz/chromium',  // ✅ Ensure correct Chromium externalization
         yargs: 'commonjs yargs',
         'yargs-parser': 'commonjs yargs-parser',
-        "puppeteer-core": "commonjs puppeteer-core"
+        "puppeteer-core": "commonjs puppeteer-core",
     },
     module: {
         rules: [
