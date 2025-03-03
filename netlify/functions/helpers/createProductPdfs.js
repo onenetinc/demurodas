@@ -11,9 +11,6 @@ const { chromium: playwrightChromium } = require('playwright');
 
 const createProductPdfs = async (slug) => {
   return new Promise(async (resolve, reject) => {
-    let browser;
-    let tempFiles = [];
-
     try {
       console.log(`Generating PDFs for ${slug}`);
 
@@ -39,8 +36,10 @@ const createProductPdfs = async (slug) => {
       // Get Chromium executable path
       const executablePath = await chromium.executablePath();
 
+// Log Chromium path
       console.log(`Chromium Executable Path: ${executablePath}`);
 
+// Check if Chromium path is valid
       if (!executablePath) {
         console.error("❌ ERROR: Chromium executable path is invalid! Exiting...");
         reject({
@@ -49,8 +48,9 @@ const createProductPdfs = async (slug) => {
         });
         return;
       }
-
-      console.log("✅ Chromium is correctly installed and executable.");
+      else {
+        console.log("✅ Chromium is correctly installed and executable.");
+      }
 
       // Launch Playwright browser
       const browser = await playwrightChromium.launch({
@@ -75,23 +75,11 @@ const createProductPdfs = async (slug) => {
       const page = await browser.newPage();
       await page.setViewportSize({ width: 1420, height: 2000 });
 
-      // **Retry page.goto() in case of failures**
-      let maxRetries = 3;
-      let attempt = 0;
-      while (attempt < maxRetries) {
-        try {
-          await page.goto(`https://demurodas.webflow.io/products/${slug}?mode=server`, {
-            waitUntil: 'domcontentloaded', // ✅ Faster & more reliable in Netlify
-            timeout: 20000,
-          });
-          console.log('✅ Page loaded successfully.');
-          break;
-        } catch (error) {
-          console.warn(`⚠️ Attempt ${attempt + 1} failed: ${error.message}`);
-          attempt++;
-          if (attempt === maxRetries) throw new Error('Failed to load page after multiple attempts');
-        }
-      }
+      // Navigate to product page
+      await page.goto(`https://demurodas.webflow.io/products/${slug}?mode=server`, {
+        waitUntil: 'networkidle',
+        timeout: 25000,
+      });
 
       // Hide trade modal
       await page.evaluate(() => {
@@ -159,24 +147,20 @@ const createProductPdfs = async (slug) => {
 
       console.log('Uploaded PDFs to storage');
 
+      // **Clean up temporary files**
+      [tempPngPage1FilePath, tempPubPngFilePath, tempPrivPngFilePath, tempPubPdfFilePath, tempPrivPdfFilePath].forEach(el => fs.unlinkSync(el));
+
       resolve({
         statusCode: 200,
         body: JSON.stringify({ message: 'PDFs generated and uploaded successfully' })
       });
+
     } catch (err) {
-      console.error("❌ ERROR:", err);
+      console.error(err);
       reject({
         statusCode: 500,
         body: JSON.stringify({ message: 'Internal Server Error', error: err.message })
       });
-
-    } finally {
-      // **Ensure temp files are always deleted**
-      tempFiles.forEach(file => {
-        if (fs.existsSync(file)) fs.unlinkSync(file);
-      });
-
-      if (browser) await browser.close();
     }
   });
 };
