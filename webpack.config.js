@@ -35,9 +35,7 @@ module.exports = {
         'playwright': 'commonjs playwright',  // ✅ Use Playwright instead of Puppeteer
         '@sparticuz/chromium': 'commonjs @sparticuz/chromium',  // ✅ Ensure correct Chromium externalization
         yargs: 'commonjs yargs',
-        'yargs-parser': 'commonjs yargs-parser',
-        "playwright-extra": "commonjs playwright-extra",
-        "puppeteer-extra-plugin-stealth": "commonjs puppeteer-extra-plugin-stealth",
+        'yargs-parser': 'commonjs yargs-parser'
     },
     module: {
         rules: [
