@@ -10,7 +10,9 @@ const getUrls = (urlsString) => {
 
         const url = decodeURI(part);
 
-        if (url.includes('https://uploads-ssl.webflow.com')) urls.push(part);
+        // if (url.includes('https://uploads-ssl.webflow.com')) urls.push(part);
+        if (url.includes('cdn.prod.website-files.com')) urls.push(part);
+        
 
     }
 
