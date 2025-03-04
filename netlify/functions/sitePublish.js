@@ -66,13 +66,13 @@ const sitePublish = async (req, res) => {
           savedMapping[id] = item;
           // await processCmsItem(id, item.imgUrl);
           // await createProductPdfs(item.slug);
-          const pdfEndpoint = `https://screenshot-app-pearl.vercel.app/api/generateProductPdfs.js?slug=${slug}`;
+          const pdfEndpoint = `https://screenshot-app-pearl.vercel.app/api/generateProductPdfs.js?slug=${item.slug}`;
           fetch(pdfEndpoint)
               .then(response => {
-                console.log(`Triggered PDF generation for ${slug} with status ${response.status}`);
+                console.log(`Triggered PDF generation for ${item.slug} with status ${response.status}`);
               })
               .catch(error => {
-                console.error(`Error triggering PDF generation for ${slug}:`, error);
+                console.error(`Error triggering PDF generation for ${item.slug}:`, error);
               });
         })
       );
@@ -92,13 +92,13 @@ const sitePublish = async (req, res) => {
           savedMapping[id] = item;
           // await processCmsItem(id, item.imgUrl);
           // await createProductPdfs(item.slug);
-          const pdfEndpoint = `https://screenshot-app-pearl.vercel.app/api/generateProductPdfs.js?slug=${slug}`;
+          const pdfEndpoint = `https://screenshot-app-pearl.vercel.app/api/generateProductPdfs.js?slug=${item.slug}`;
           fetch(pdfEndpoint)
               .then(response => {
-                console.log(`Triggered PDF generation for ${slug} with status ${response.status}`);
+                console.log(`Triggered PDF generation for ${item.slug} with status ${response.status}`);
               })
               .catch(error => {
-                console.error(`Error triggering PDF generation for ${slug}:`, error);
+                console.error(`Error triggering PDF generation for ${item.slug}:`, error);
               });
         })
       );
