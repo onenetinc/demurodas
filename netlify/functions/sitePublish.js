@@ -66,7 +66,7 @@ const sitePublish = async (req, res) => {
           savedMapping[id] = item;
           // await processCmsItem(id, item.imgUrl);
           // await createProductPdfs(item.slug);
-          const pdfEndpoint = `https://screenshot-app-charlesneigum-onenetinc.vercel.app/api/generateProductPdfs.js?slug=${item.slug}`;
+          const pdfEndpoint = `https://screenshot-app-pearl.vercel.app/api/generateProductPdfs.js?slug=${item.slug}`;
           fetch(pdfEndpoint)
               .then(response => {
                 console.log(`Triggered PDF generation for ${item.slug} with status ${response.status}`);
@@ -92,7 +92,7 @@ const sitePublish = async (req, res) => {
           savedMapping[id] = item;
           // await processCmsItem(id, item.imgUrl);
           // await createProductPdfs(item.slug);
-          const pdfEndpoint = `https://screenshot-app-charlesneigum-onenetinc.vercel.app/api/generateProductPdfs.js?slug=${item.slug}`;
+          const pdfEndpoint = `https://screenshot-app-pearl.vercel.app/api/generateProductPdfs.js?slug=${item.slug}`;
           fetch(pdfEndpoint)
               .then(response => {
                 console.log(`Triggered PDF generation for ${item.slug} with status ${response.status}`);
