@@ -23,7 +23,7 @@ const sitePublish = async (req, res) => {
 
     const updatedMapping = createNewMapping(currentCmsItems);
 
-    console.log("currentCmsItems:", currentCmsItems.length);
+    console.log("currentCmsItems length:", currentCmsItems.length);
 
     // check if savedMapping is empty
     if (Object.keys(savedMapping).length === 0) {
@@ -65,7 +65,15 @@ const sitePublish = async (req, res) => {
           }
           savedMapping[id] = item;
           // await processCmsItem(id, item.imgUrl);
-          await createProductPdfs(item.slug);
+          // await createProductPdfs(item.slug);
+          const pdfEndpoint = `https://screenshot-app-pearl.vercel.app/api/generateProductPdfs.js?slug=${slug}`;
+          fetch(pdfEndpoint)
+              .then(response => {
+                console.log(`Triggered PDF generation for ${slug} with status ${response.status}`);
+              })
+              .catch(error => {
+                console.error(`Error triggering PDF generation for ${slug}:`, error);
+              });
         })
       );
     }
