@@ -11,7 +11,13 @@ const getUrls = (urlsString) => {
         const url = decodeURI(part);
 
         // if (url.includes('https://uploads-ssl.webflow.com')) urls.push(part);
-        if (url.includes('cdn.prod.website-files.com')) urls.push(part);
+        if (url.includes('cdn.prod.website-files.com')) {
+
+            const newPart = url.replace('https://cdn.prod.website-files.com/5c3e43b5d1dbdf536d64838f', 'https://onenet.twic.pics/ddas');
+            const newPart2 = newPart + '?twic=v1/resize=-x1200';
+
+            urls.push(newPart2);
+        }
         
 
     }
