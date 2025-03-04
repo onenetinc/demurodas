@@ -66,15 +66,32 @@ const createZip = async (req, res) => {
       .on('finish', () => {
         console.log(`Wrote ${zipName} to temp dir`);
 
-        res.sendFile(tempFilePath, (err) => {
-          if (err) {
-            console.log('Error sending file as response');
-            return res.status(500).send('Error sending file');
-          }
-
-          console.log(`Sent zip file to client, removing ${zipName} from temp dir`);
-          fs.unlinkSync(tempFilePath);
+        // Read, encode, and return the file
+        const fileBuffer = fs.readFileSync(tempFilePath);
+        const base64Zip = fileBuffer.toString('base64');
+        fs.unlinkSync(tempFilePath);
+        // Use your response helper to return the proper object
+        return res.status(200).send({
+          headers: {
+            'Content-Type': 'application/zip',
+            'Content-Disposition': 'attachment; filename="download.zip"',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Methods': 'GET,POST,OPTIONS'
+          },
+          body: base64Zip,
+          isBase64Encoded: true
         });
+
+        // res.sendFile(tempFilePath, (err) => {
+        //   if (err) {
+        //     console.log('Error sending file as response');
+        //     return res.status(500).send('Error sending file');
+        //   }
+
+        //   console.log(`Sent zip file to client, removing ${zipName} from temp dir`);
+        //   fs.unlinkSync(tempFilePath);
+        // });
       })
       .on('error', (err) => {
         console.error(err);
