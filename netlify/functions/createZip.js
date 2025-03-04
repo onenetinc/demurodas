@@ -87,6 +87,21 @@ const createZip = async (req, res) => {
 };
 
 exports.handler = async (event, context) => {
+
+
+  // 1. Handle OPTIONS preflight
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS'
+      },
+      body: 'OK'
+    };
+  }
+
   const req = {
     query: event.queryStringParameters,
     method: event.httpMethod,
@@ -102,15 +117,19 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET,POST,OPTIONS'
         }
       }),
       send: (message) => ({
         statusCode: code,
         body: message,
         headers: {
-          'Access-Control-Allow-Origin': '*'
-        }
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET,POST,OPTIONS'
+        },
       })
     }),
     sendFile: (filePath, callback) => {
@@ -121,7 +140,9 @@ exports.handler = async (event, context) => {
           statusCode: 200,
           headers: {
             'Content-Type': 'application/zip',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Methods': 'GET,POST,OPTIONS'
           },
           body: fileStream
         };
@@ -132,7 +153,9 @@ exports.handler = async (event, context) => {
           statusCode: 500,
           body: 'Error sending file',
           headers: {
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Methods': 'GET,POST,OPTIONS'
           }
         };
       });
