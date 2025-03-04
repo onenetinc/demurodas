@@ -8,7 +8,8 @@ const getUrls = (urlsString) => {
 
         if (index > 10) break;
 
-        const url = decodeURI(part);
+        // const url = decodeURI(part);
+        const url = part;
 
         // if (url.includes('https://uploads-ssl.webflow.com')) urls.push(part);
         if (url.includes('cdn.prod.website-files.com')) {

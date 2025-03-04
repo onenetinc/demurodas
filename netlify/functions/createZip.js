@@ -40,13 +40,14 @@ exports.handler = async (event, context) => {
       return errorResponse(404, 'No URLs found');
     }
 
+
     // Download images and add them to zip
     const zip = new jszip();
     for (let i = 0; i < urlArray.length; i++) {
       const url = urlArray[i];
       const data = await getBase64Buffer(url);
       if (data) {
-        const ext = decodeURIComponent(url).split('.').pop();
+        const ext = decodeURIComponent(url).split('.').pop().split('?')[0];
         const name = `${i + 1}.${ext}`;
         zip.file(name, data, { base64: true });
         console.log(`Downloaded image ${i + 1} of ${urlArray.length}`);
