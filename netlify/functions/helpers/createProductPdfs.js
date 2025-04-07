@@ -78,6 +78,14 @@ const createProductPdfs = async (slug) => {
         timeout: 0
       });
 
+      // Wait until #main is hidden and either portrait or landscape wrapper is visible
+      await page.waitForFunction(() => {
+        const mainHidden = getComputedStyle(document.getElementById('main'))?.display === 'none';
+        const portraitVisible = getComputedStyle(document.querySelector('.portrait-pdf-wrapper'))?.display === 'flex';
+        const landscapeVisible = getComputedStyle(document.querySelector('.landscape-pdf-wrapper'))?.display === 'flex';
+        return mainHidden && (portraitVisible || landscapeVisible);
+      }, { timeout: 10000 });
+
       // Hide trade modal
       await page.evaluate(() => {
         document.getElementById('tradeModalWrapper').remove();
