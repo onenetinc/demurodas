@@ -49,41 +49,43 @@ firebase.auth().onAuthStateChanged((user) => {
 
 const getPricing = async () => {
 
-    try {
+    // try {
+    //
+    //     console.log(`User is authed, sending request for private data`);
+    //
+    //     priceHeading.style.display = 'block';
+    //     price.style.display = 'block';
+    //
+    //     const sku = document.getElementById('sku').innerText;
+    //
+    //     const token = await firebase.auth().currentUser.getIdToken(true);
+    //
+    //     const post = await fetch(`${getPrivateWfDataUrl}?token=${token}&sku=${sku}`);
+    //
+    //     if (post.status === 200) {
+    //
+    //         const text = await post.json();
+    //
+    //         const priceEls = document.querySelectorAll("[data-pdf='price']");
+    //         const priceHeadings = document.querySelectorAll("[data-pdf='priceHeading']");
+    //         priceEls.forEach(el => el.innerHTML = text);
+    //         priceEls.forEach(el => el.style.display = 'block');
+    //         priceHeadings.forEach(el => el.style.display = 'block');
+    //
+    //     } else {
+    //
+    //         throw post.status;
+    //
+    //     }
+    //
+    // } catch (err) {
+    //
+    //     Sentry.captureException(err);
+    //     price.innerHTML = 'Please contact us for pricing';
+    //
+    // }
 
-        console.log(`User is authed, sending request for private data`);
-
-        priceHeading.style.display = 'block';
-        price.style.display = 'block';
-
-        const sku = document.getElementById('sku').innerText;
-
-        const token = await firebase.auth().currentUser.getIdToken(true);
-
-        const post = await fetch(`${getPrivateWfDataUrl}?token=${token}&sku=${sku}`);
-
-        if (post.status === 200) {
-
-            const text = await post.json();
-
-            const priceEls = document.querySelectorAll("[data-pdf='price']");
-            const priceHeadings = document.querySelectorAll("[data-pdf='priceHeading']");
-            priceEls.forEach(el => el.innerHTML = text);
-            priceEls.forEach(el => el.style.display = 'block');
-            priceHeadings.forEach(el => el.style.display = 'block');
-
-        } else {
-
-            throw post.status;
-
-        }
-
-    } catch (err) {
-
-        Sentry.captureException(err);
-        price.innerHTML = 'Please contact us for pricing';
-
-    }
+    price.innerHTML = 'Please contact us for pricing.';
 
 }
 
@@ -240,40 +242,40 @@ setTimeout(() => {
     const cookiesObj = getCookies();
 
     const tradeModalWrapper = document.getElementById('tradeModalWrapper');
-    
+
     if (cookiesObj._hideTradeModal) {
 
         tradeModalWrapper.style.display = 'none';
-        
+
     } else if (window.location.href.includes('mode=')) {
 
         tradeModalWrapper.style.display = 'none';
 
     }
-    
+
     const tradeJoinBtn = document.getElementById('tradeJoinBtn');
     const tradeDismissBtn = document.getElementById('tradeDismissBtn');
-    
+
     [tradeJoinBtn, tradeDismissBtn].forEach(btn => {
 
         if (btn) {
 
             btn.addEventListener('click', () => {
-    
+
                 let expiryDate = new Date();
                 expiryDate.setMonth(expiryDate.getMonth() + 1);
                 expiryDate.toUTCString();
-        
+
                 document.cookie = `_hideTradeModal=true; expires=${expiryDate}; path=/`;
-        
+
                 tradeModalWrapper.style.display = 'none';
-        
+
             });
 
         }
-    
+
     });
-    
+
 }, 2000);
 
 
